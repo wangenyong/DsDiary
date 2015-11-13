@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7FE07A274404C372B16737E /* Pods_DsDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08526625DD04265CCE639381 /* Pods_DsDiary.framework */; };
 		C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */; };
 		C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7F1BF5ABED00C39277 /* ViewController.swift */; };
 		C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B811BF5ABED00C39277 /* Main.storyboard */; };
 		C0734B861BF5ABED00C39277 /* DsDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0734B841BF5ABED00C39277 /* DsDiary.xcdatamodeld */; };
 		C0734B881BF5ABED00C39277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0734B871BF5ABED00C39277 /* Assets.xcassets */; };
 		C0734B8B1BF5ABED00C39277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B891BF5ABED00C39277 /* LaunchScreen.storyboard */; };
+		C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		08526625DD04265CCE639381 /* Pods_DsDiary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DsDiary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.release.xcconfig"; sourceTree = "<group>"; };
+		B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		C0734B7A1BF5ABED00C39277 /* DsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0734B7F1BF5ABED00C39277 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		C0734B871BF5ABED00C39277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0734B8A1BF5ABED00C39277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0734B8C1BF5ABED00C39277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7FE07A274404C372B16737E /* Pods_DsDiary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2533CB07B37BD77006416A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */,
+				6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BC429F5ABD0D8D29C45CDB59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				08526625DD04265CCE639381 /* Pods_DsDiary.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C0734B711BF5ABED00C39277 = {
 			isa = PBXGroup;
 			children = (
 				C0734B7C1BF5ABED00C39277 /* DsDiary */,
 				C0734B7B1BF5ABED00C39277 /* Products */,
+				B2533CB07B37BD77006416A3 /* Pods */,
+				BC429F5ABD0D8D29C45CDB59 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +82,7 @@
 		C0734B7C1BF5ABED00C39277 /* DsDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C0E9AD0F1BF5AFCD0052D9E5 /* Extensions */,
 				C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */,
 				C0734B7F1BF5ABED00C39277 /* ViewController.swift */,
 				C0734B811BF5ABED00C39277 /* Main.storyboard */,
@@ -67,6 +94,14 @@
 			path = DsDiary;
 			sourceTree = "<group>";
 		};
+		C0E9AD0F1BF5AFCD0052D9E5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0734B8F1BF5ABED00C39277 /* Build configuration list for PBXNativeTarget "DsDiary" */;
 			buildPhases = (
+				207C4D4AF3571F74EDD9DEF6 /* Check Pods Manifest.lock */,
 				C0734B761BF5ABED00C39277 /* Sources */,
 				C0734B771BF5ABED00C39277 /* Frameworks */,
 				C0734B781BF5ABED00C39277 /* Resources */,
+				AF9906A319F9BA00F944E8AB /* Embed Pods Frameworks */,
+				017C7A7E9E95F2B4D89E96FD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -133,12 +171,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		017C7A7E9E95F2B4D89E96FD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		207C4D4AF3571F74EDD9DEF6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AF9906A319F9BA00F944E8AB /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C0734B761BF5ABED00C39277 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */,
+				C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */,
 				C0734B861BF5ABED00C39277 /* DsDiary.xcdatamodeld in Sources */,
 				C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */,
 			);
@@ -249,6 +336,7 @@
 		};
 		C0734B901BF5ABED00C39277 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DsDiary/Info.plist;
@@ -260,6 +348,7 @@
 		};
 		C0734B911BF5ABED00C39277 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DsDiary/Info.plist;
@@ -288,6 +377,7 @@
 				C0734B911BF5ABED00C39277 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
