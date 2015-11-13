@@ -17,6 +17,8 @@
 		C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */; };
 		C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD131BF5B4A70052D9E5 /* DiaryTableViewCell.swift */; };
 		C0E9AD161BF5B4A70052D9E5 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0E9AD141BF5B4A70052D9E5 /* DiaryTableViewCell.xib */; };
+		C0E9AD191BF5C1E60052D9E5 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD181BF5C1E60052D9E5 /* DiaryViewController.swift */; };
+		C0E9AD1C1BF5CEF10052D9E5 /* Weathers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD1B1BF5CEF10052D9E5 /* Weathers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
 		C0E9AD131BF5B4A70052D9E5 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		C0E9AD141BF5B4A70052D9E5 /* DiaryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiaryTableViewCell.xib; sourceTree = "<group>"; };
+		C0E9AD181BF5C1E60052D9E5 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+		C0E9AD1B1BF5CEF10052D9E5 /* Weathers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weathers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +90,11 @@
 		C0734B7C1BF5ABED00C39277 /* DsDiary */ = {
 			isa = PBXGroup;
 			children = (
+				C0E9AD1A1BF5CED40052D9E5 /* Enums */,
+				C0E9AD171BF5C0B20052D9E5 /* View Controller */,
 				C0E9AD0F1BF5AFCD0052D9E5 /* Extensions */,
 				C0E9AD121BF5B4830052D9E5 /* View Cell */,
 				C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */,
-				C0734B7F1BF5ABED00C39277 /* ViewController.swift */,
 				C0734B811BF5ABED00C39277 /* Main.storyboard */,
 				C0734B871BF5ABED00C39277 /* Assets.xcassets */,
 				C0734B891BF5ABED00C39277 /* LaunchScreen.storyboard */,
@@ -114,6 +119,23 @@
 				C0E9AD141BF5B4A70052D9E5 /* DiaryTableViewCell.xib */,
 			);
 			name = "View Cell";
+			sourceTree = "<group>";
+		};
+		C0E9AD171BF5C0B20052D9E5 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C0734B7F1BF5ABED00C39277 /* ViewController.swift */,
+				C0E9AD181BF5C1E60052D9E5 /* DiaryViewController.swift */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		C0E9AD1A1BF5CED40052D9E5 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C0E9AD1B1BF5CEF10052D9E5 /* Weathers.swift */,
+			);
+			name = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +263,10 @@
 			files = (
 				C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */,
 				C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */,
+				C0E9AD1C1BF5CEF10052D9E5 /* Weathers.swift in Sources */,
 				C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */,
 				C0734B861BF5ABED00C39277 /* DsDiary.xcdatamodeld in Sources */,
+				C0E9AD191BF5C1E60052D9E5 /* DiaryViewController.swift in Sources */,
 				C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

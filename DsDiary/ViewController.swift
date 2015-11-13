@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DiarySavedControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -22,6 +22,29 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showDiary" {
+            let vc = segue.destinationViewController as! DiaryViewController
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
+            vc.isNewDiary = false
+            vc.delegate = self
+        } else if segue.identifier == "newDiary" {
+            let vc = segue.destinationViewController as! DiaryViewController
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: "diarySave")
+            vc.delegate = self
+        }
+    }
+    
+    /**
+     日记保存成功后的回调方法
+     
+     - parameter diary: 保存成功的日记
+     */
+    func diarySaveSucceed(diary: String) {
+        self.tableView.reloadData()
     }
 
 }

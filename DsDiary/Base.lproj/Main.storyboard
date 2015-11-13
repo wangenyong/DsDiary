@@ -75,7 +75,7 @@
         <!--Diary View Controller-->
         <scene sceneID="mAA-Ob-MVI">
             <objects>
-                <viewController id="lpx-rn-l2l" customClass="DiaryViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="lpx-rn-l2l" customClass="DiaryViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4xi-fg-iZL"/>
                         <viewControllerLayoutGuide type="bottom" id="9en-n8-n01"/>
@@ -125,6 +125,11 @@
                             <constraint firstItem="oJR-CM-uiT" firstAttribute="top" secondItem="4xi-fg-iZL" secondAttribute="bottom" constant="8" id="weF-yy-KmP"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="GYl-R6-xH6" id="lT1-TQ-UqW"/>
+                        <outlet property="textView" destination="pOH-8m-Z0u" id="tSM-vf-lDY"/>
+                        <outlet property="weatherLabel" destination="oJR-CM-uiT" id="AKn-c0-4zC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tUb-1C-iAC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
