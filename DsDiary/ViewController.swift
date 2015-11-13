@@ -54,6 +54,9 @@ extension ViewController: UITableViewDataSource {
 
 
 extension ViewController: UITableViewDelegate {
-    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showDiary", sender: tableView)
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }
 
