@@ -83,7 +83,6 @@ class DiaryViewController: UIViewController {
      - parameter sender: 日期 UIBarButtonItem
      */
     func CalendarSelected(sender: UIBarButtonItem!) {
-        /**
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let calendarViewController: CalendarViewController = storyboard.instantiateViewControllerWithIdentifier("CalendarController") as! CalendarViewController
         calendarViewController.modalPresentationStyle = .Popover
@@ -95,7 +94,6 @@ class DiaryViewController: UIViewController {
         popoverMenuViewController?.barButtonItem = sender
         
         presentViewController(calendarViewController, animated: true, completion: nil)
-        */
     }
     
     /**
@@ -141,6 +139,17 @@ extension DiaryViewController: SavingWeatherControllerDelegate {
      */
     func saveWeather(weather: Weathers) {
         self.weather = weather
+    }
+}
+
+extension DiaryViewController: CalendarSelectedControllerDelegate {
+    /**
+     保存日期协议方法
+     
+     - parameter date: 选择的日期
+     */
+    func saveCalendar(date: CVDate) {
+        self.calendar = date
     }
 }
 
