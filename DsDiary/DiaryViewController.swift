@@ -103,7 +103,6 @@ class DiaryViewController: UIViewController {
      - parameter sender: 天气 UIBarButtonItem
      */
     func weatherSelected(sender: UIBarButtonItem!) {
-        /**
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let weatherViewController: WeatherCollectionViewController = storyboard.instantiateViewControllerWithIdentifier("WeatherController") as! WeatherCollectionViewController
         weatherViewController.modalPresentationStyle = .Popover
@@ -116,7 +115,6 @@ class DiaryViewController: UIViewController {
         popoverMenuViewController?.barButtonItem = sender
         
         presentViewController(weatherViewController, animated: true, completion: nil)
-        */
     }
     
     /**
@@ -127,6 +125,23 @@ class DiaryViewController: UIViewController {
     }
 
 
+}
+
+extension DiaryViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+}
+
+extension DiaryViewController: SavingWeatherControllerDelegate {
+    /**
+     保存天气协议方法
+     
+     - parameter weather: 选择的天气
+     */
+    func saveWeather(weather: Weathers) {
+        self.weather = weather
+    }
 }
 
 
