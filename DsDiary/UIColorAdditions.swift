@@ -16,4 +16,8 @@ extension UIColor {
     class func secondaryColor() -> UIColor {
         return UIColor(red: 128.0/255.0, green: 128.0/255.0, blue: 0.0/255.0, alpha: 1.0)
     }
+    
+    class func thirdColor() -> UIColor {
+        return UIColor(red: 246.0/255.0, green: 247.0/255.0, blue: 243.0/255.0, alpha: 1.0)
+    }
 }
