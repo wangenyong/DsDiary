@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, DiarySavedControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
+    
+    var diarys = [NSManagedObject]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +20,24 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         let nib = UINib(nibName: "DiaryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "DiaryTableViewCell")
         tableView.separatorStyle = .None
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        let fetchRequest = NSFetchRequest(entityName: "Diary")
+        
+        do {
+            let results = try managedContext.executeFetchRequest(fetchRequest)
+            diarys = results as! [NSManagedObject]
+            tableView.reloadData()
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +76,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return diarys.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -66,6 +87,24 @@ extension ViewController: UITableViewDataSource {
         } else {
             cell.contentView.backgroundColor = UIColor.whiteColor()
         }
+        
+        let diary = diarys[indexPath.row]
+        
+        let date = diary.valueForKey("date") as? NSDate
+        let calendar   = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date!))!
+        let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date!))!
+        let YearInt    = (calendar?.component(NSCalendarUnit.Year, fromDate: date!))!
+        let weekdayInt = (calendar?.component(NSCalendarUnit.Weekday, fromDate: date!))!
+        
+        cell.dayLabel.text       = "\(DayInt)"
+        cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
+        cell.weekdayLabel.text      = weekdayInt.weekDay()
+        cell.contentLabel.text = diary.valueForKey("content") as? String
+        cell.weatherLabel.text = diary.valueForKey("weather") as? String
+        
+
+        
         
         return cell
     }

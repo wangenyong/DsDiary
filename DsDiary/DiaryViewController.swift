@@ -8,6 +8,7 @@
 
 import UIKit
 import CVCalendar
+import CoreData
 
 class DiaryViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
@@ -22,9 +23,9 @@ class DiaryViewController: UIViewController {
         }
     }
     
-    var calendar: CVDate = CVDate(date: NSDate()) {
+    var date: CVDate = CVDate(date: NSDate()) {
         didSet {
-            dateLabel.text = calendar.commonDescription
+            dateLabel.text = date.commonDescription
         }
     }
     
@@ -75,7 +76,22 @@ class DiaryViewController: UIViewController {
      日记保存方法
      */
     func diarySave() {
-
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Diary", inManagedObjectContext:managedContext)
+        let diary = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        
+        diary.setValue(textView.text, forKey: "content")
+        diary.setValue(weather.rawValue, forKey: "weather")
+        diary.setValue(date.convertedDate(), forKey: "date")
+        
+        do {
+            try managedContext.save()
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
     
     /**
@@ -149,7 +165,7 @@ extension DiaryViewController: CalendarSelectedControllerDelegate {
      - parameter date: 选择的日期
      */
     func saveCalendar(date: CVDate) {
-        self.calendar = date
+        self.date = date
     }
 }
 

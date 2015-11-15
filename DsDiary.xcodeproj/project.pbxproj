@@ -22,6 +22,7 @@
 		C0E9AD1E1BF5D42F0052D9E5 /* WeatherCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD1D1BF5D42F0052D9E5 /* WeatherCollectionViewController.swift */; };
 		C0E9AD201BF5D47A0052D9E5 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD1F1BF5D47A0052D9E5 /* WeatherCollectionViewCell.swift */; };
 		C0E9AD221BF5D75A0052D9E5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD211BF5D75A0052D9E5 /* CalendarViewController.swift */; };
+		C0E9AD241BF87AF20052D9E5 /* IntAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD231BF87AF20052D9E5 /* IntAdditions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C0E9AD1D1BF5D42F0052D9E5 /* WeatherCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewController.swift; sourceTree = "<group>"; };
 		C0E9AD1F1BF5D47A0052D9E5 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0E9AD211BF5D75A0052D9E5 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		C0E9AD231BF87AF20052D9E5 /* IntAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntAdditions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */,
+				C0E9AD231BF87AF20052D9E5 /* IntAdditions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			files = (
 				C0E9AD221BF5D75A0052D9E5 /* CalendarViewController.swift in Sources */,
 				C0E9AD201BF5D47A0052D9E5 /* WeatherCollectionViewCell.swift in Sources */,
+				C0E9AD241BF87AF20052D9E5 /* IntAdditions.swift in Sources */,
 				C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */,
 				C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */,
 				C0E9AD1C1BF5CEF10052D9E5 /* Weathers.swift in Sources */,
