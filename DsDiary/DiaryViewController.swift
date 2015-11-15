@@ -16,6 +16,8 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     
     var diary: NSManagedObject?
+    var managedContext: NSManagedObjectContext?
+    
     
     var isNewDiary = true
     
@@ -34,10 +36,17 @@ class DiaryViewController: UIViewController {
     var delegate: DiarySavedControllerDelegate?
 
     override func viewDidLoad() {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        managedContext  = appDelegate.managedObjectContext
+        
         if isNewDiary {
             textView.becomeFirstResponder()
             dateLabel.text    = CVDate(date: NSDate()).commonDescription
             weatherLabel.text = Weathers.Sun.rawValue
+            
+            let entity = NSEntityDescription.entityForName("Diary", inManagedObjectContext:managedContext!)
+            diary      = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+            
         } else {
             textView.editable = false
             dateLabel.text    = CVDate(date: diary!.valueForKey("date") as! NSDate).commonDescription
@@ -82,18 +91,12 @@ class DiaryViewController: UIViewController {
      日记保存方法
      */
     func diarySave() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        let entity =  NSEntityDescription.entityForName("Diary", inManagedObjectContext:managedContext)
-        let diary = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        
-        diary.setValue(textView.text, forKey: "content")
-        diary.setValue(weather.rawValue, forKey: "weather")
-        diary.setValue(date.convertedDate(), forKey: "date")
+        diary!.setValue(textView.text, forKey: "content")
+        diary!.setValue(weather.rawValue, forKey: "weather")
+        diary!.setValue(date.convertedDate(), forKey: "date")
         
         do {
-            try managedContext.save()
+            try managedContext!.save()
             self.navigationController?.popToRootViewControllerAnimated(true)
         } catch let error as NSError  {
             print("Could not save \(error), \(error.userInfo)")
