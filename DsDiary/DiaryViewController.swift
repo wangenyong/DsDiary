@@ -15,6 +15,8 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
+    var diary: NSManagedObject?
+    
     var isNewDiary = true
     
     var weather: Weathers = Weathers.Sun {
@@ -34,8 +36,13 @@ class DiaryViewController: UIViewController {
     override func viewDidLoad() {
         if isNewDiary {
             textView.becomeFirstResponder()
+            dateLabel.text    = CVDate(date: NSDate()).commonDescription
+            weatherLabel.text = Weathers.Sun.rawValue
         } else {
             textView.editable = false
+            dateLabel.text    = CVDate(date: diary!.valueForKey("date") as! NSDate).commonDescription
+            weatherLabel.text = diary!.valueForKey("weather") as? String
+            textView.text     = diary!.valueForKey("content") as? String
         }
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
@@ -52,8 +59,7 @@ class DiaryViewController: UIViewController {
         toolbar.setItems(items, animated: false)
         textView.inputAccessoryView = toolbar
         
-        dateLabel.text    = CVDate(date: NSDate()).commonDescription
-        weatherLabel.text = Weathers.Sun.rawValue
+        
         
         super.viewDidLoad()
     }

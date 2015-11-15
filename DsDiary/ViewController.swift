@@ -50,8 +50,12 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         if segue.identifier == "showDiary" {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
+            if let indexPath = tableView.indexPathForSelectedRow {
+                vc.diary = diarys[indexPath.row]
+            }
             vc.isNewDiary = false
             vc.delegate = self
+      
         } else if segue.identifier == "newDiary" {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: "diarySave")
@@ -90,7 +94,7 @@ extension ViewController: UITableViewDataSource {
         
         let diary = diarys[indexPath.row]
         
-        let date = diary.valueForKey("date") as? NSDate
+        let date       = diary.valueForKey("date") as? NSDate
         let calendar   = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
         let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date!))!
         let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date!))!
@@ -99,9 +103,9 @@ extension ViewController: UITableViewDataSource {
         
         cell.dayLabel.text       = "\(DayInt)"
         cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
-        cell.weekdayLabel.text      = weekdayInt.weekDay()
-        cell.contentLabel.text = diary.valueForKey("content") as? String
-        cell.weatherLabel.text = diary.valueForKey("weather") as? String
+        cell.weekdayLabel.text   = weekdayInt.weekDay()
+        cell.contentLabel.text   = diary.valueForKey("content") as? String
+        cell.weatherLabel.text   = diary.valueForKey("weather") as? String
         
 
         
