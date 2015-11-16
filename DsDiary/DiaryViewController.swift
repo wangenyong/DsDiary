@@ -34,11 +34,11 @@ class DiaryViewController: UIViewController {
     var delegate: DiarySavedControllerDelegate?
 
     override func viewDidLoad() {
+        
         if isNewDiary {
             textView.becomeFirstResponder()
             dateLabel.text    = CVDate(date: NSDate()).commonDescription
             weatherLabel.text = Weathers.Sun.rawValue
-            
         } else {
             textView.editable = false
             dateLabel.text    = CVDate(date: diary!.valueForKey("date") as! NSDate).commonDescription
@@ -59,6 +59,7 @@ class DiaryViewController: UIViewController {
         toolbar.backgroundColor = UIColor.whiteColor()
         toolbar.setItems(items, animated: false)
         textView.inputAccessoryView = toolbar
+        textView.delegate = self
         
         
         
@@ -153,6 +154,12 @@ class DiaryViewController: UIViewController {
 extension DiaryViewController: UIPopoverPresentationControllerDelegate {
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return .None
+    }
+}
+
+extension DiaryViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(textView: UITextView) {
+        textView.backgroundColor = UIColor.thirdColor()
     }
 }
 
