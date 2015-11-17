@@ -8,14 +8,12 @@
 
 import UIKit
 import CVCalendar
-import CoreData
+import RealmSwift
 
 class DiaryViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
-    
-    var diary: NSManagedObject?
     
     var isNewDiary = true
     
@@ -41,9 +39,6 @@ class DiaryViewController: UIViewController {
             weatherLabel.text = Weathers.Sun.rawValue
         } else {
             textView.editable = false
-            dateLabel.text    = CVDate(date: diary!.valueForKey("date") as! NSDate).commonDescription
-            weatherLabel.text = diary!.valueForKey("weather") as? String
-            textView.text     = diary!.valueForKey("content") as? String
         }
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
@@ -84,23 +79,22 @@ class DiaryViewController: UIViewController {
      日记保存方法
      */
     func diarySave() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext  = appDelegate.managedObjectContext
+        let diary     = Diary()
+        let realm     = try! Realm()
         
-        if isNewDiary {
-            let entity = NSEntityDescription.entityForName("Diary", inManagedObjectContext:managedContext)
-            diary      = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
-        }
-        
-        diary!.setValue(textView.text, forKey: "content")
-        diary!.setValue(weather.rawValue, forKey: "weather")
-        diary!.setValue(date.convertedDate(), forKey: "date")
+        diary.uuid    = NSUUID().UUIDString
+        diary.content = textView.text
+        diary.weather = weather.rawValue
+        diary.date    = NSDate()
         
         do {
-            try managedContext.save()
-            self.navigationController?.popToRootViewControllerAnimated(true)
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+            try realm.write {
+                realm.add(diary)
+            }
+            
+            self.navigationController?.popViewControllerAnimated(true)
+        } catch {
+            print("can't save")
         }
     }
     

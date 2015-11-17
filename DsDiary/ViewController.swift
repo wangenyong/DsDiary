@@ -7,12 +7,14 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ViewController: UIViewController, DiarySavedControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     
-    var diarys = [NSManagedObject]()
+    let realm = try! Realm()
+    let diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
+    var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,25 +22,12 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         let nib = UINib(nibName: "DiaryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "DiaryTableViewCell")
         tableView.separatorStyle = .None
+        
+        notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
+            self.tableView.reloadData()
+        }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Diary")
-        
-        do {
-            let results = try managedContext.executeFetchRequest(fetchRequest)
-            diarys = results as! [NSManagedObject]
-            tableView.reloadData()
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -51,7 +40,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
             if let indexPath = tableView.indexPathForSelectedRow {
-                vc.diary = diarys[indexPath.row]
+                //vc.diary = diarys[indexPath.row]
             }
             vc.isNewDiary = false
             vc.delegate = self
@@ -94,21 +83,18 @@ extension ViewController: UITableViewDataSource {
         
         let diary = diarys[indexPath.row]
         
-        let date       = diary.valueForKey("date") as? NSDate
+        let date       = diary.date
         let calendar   = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date!))!
-        let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date!))!
-        let YearInt    = (calendar?.component(NSCalendarUnit.Year, fromDate: date!))!
-        let weekdayInt = (calendar?.component(NSCalendarUnit.Weekday, fromDate: date!))!
+        let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date))!
+        let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date))!
+        let YearInt    = (calendar?.component(NSCalendarUnit.Year, fromDate: date))!
+        let weekdayInt = (calendar?.component(NSCalendarUnit.Weekday, fromDate: date))!
         
         cell.dayLabel.text       = "\(DayInt)"
         cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
         cell.weekdayLabel.text   = weekdayInt.weekDay()
-        cell.contentLabel.text   = diary.valueForKey("content") as? String
-        cell.weatherLabel.text   = diary.valueForKey("weather") as? String
-        
-
-        
+        cell.contentLabel.text   = diary.content
+        cell.weatherLabel.text   = diary.weather
         
         return cell
     }
