@@ -4,7 +4,6 @@
  use_frameworks!
 
 target 'DsDiary' do
-pod 'CVCalendar', '~> 1.2.7'
 pod 'Dodo', '~> 2.0'
 pod 'RealmSwift'
 end

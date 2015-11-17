@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CVCalendar
 import RealmSwift
 
 class DiaryViewController: UIViewController {
@@ -23,9 +22,9 @@ class DiaryViewController: UIViewController {
         }
     }
     
-    var date: CVDate = CVDate(date: NSDate()) {
+    var date: NSDate = NSDate() {
         didSet {
-            dateLabel.text = date.commonDescription
+            dateLabel.text = date.customFormatDate()
         }
     }
     
@@ -35,10 +34,11 @@ class DiaryViewController: UIViewController {
         
         if isNewDiary {
             textView.becomeFirstResponder()
-            dateLabel.text    = CVDate(date: NSDate()).commonDescription
+            dateLabel.text    = NSDate().customFormatDate()
             weatherLabel.text = Weathers.Sun.rawValue
         } else {
             textView.editable = false
+            
         }
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
@@ -85,7 +85,7 @@ class DiaryViewController: UIViewController {
         diary.uuid    = NSUUID().UUIDString
         diary.content = textView.text
         diary.weather = weather.rawValue
-        diary.date    = NSDate()
+        diary.date    = date
         
         do {
             try realm.write {
@@ -174,7 +174,7 @@ extension DiaryViewController: CalendarSelectedControllerDelegate {
      
      - parameter date: 选择的日期
      */
-    func saveCalendar(date: CVDate) {
+    func saveCalendar(date: NSDate) {
         self.date = date
     }
 }

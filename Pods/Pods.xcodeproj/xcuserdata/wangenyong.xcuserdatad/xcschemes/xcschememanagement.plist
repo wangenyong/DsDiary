@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CVCalendar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Dodo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,12 +27,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>403A80B05E4D4C76B2CB7BBEA006B551</key>
+		<key>0A29671B444684B94A04D248B4EFCAF6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60BB61941BB2CAC7B3981D2684BAA6A2</key>
+		<key>59BD9CA4FA3B5AF693367FED354FE70A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AF30C801882DC22EED8601CC158822D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BA14B622689766F6B8A4F42FD9DE552F</key>
+		<key>C8B4DE7F788F0FDECD40FDAFF3DA2F83</key>
 		<dict>
 			<key>primary</key>
 			<true/>

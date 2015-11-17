@@ -84,13 +84,11 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-DsDiary/CVCalendar.framework"
   install_framework "Pods-DsDiary/Dodo.framework"
   install_framework "Pods-DsDiary/Realm.framework"
   install_framework "Pods-DsDiary/RealmSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-DsDiary/CVCalendar.framework"
   install_framework "Pods-DsDiary/Dodo.framework"
   install_framework "Pods-DsDiary/Realm.framework"
   install_framework "Pods-DsDiary/RealmSwift.framework"

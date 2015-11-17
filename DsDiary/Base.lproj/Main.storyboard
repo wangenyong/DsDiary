@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Diary-->
@@ -189,7 +190,7 @@
             </objects>
             <point key="canvasLocation" x="2878" y="-355"/>
         </scene>
-        <!--Calendar Appearance Delegate-->
+        <!--Calendar View Controller-->
         <scene sceneID="kPh-1G-RZ0">
             <objects>
                 <viewController storyboardIdentifier="CalendarController" id="6aa-p9-TmW" customClass="CalendarViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
@@ -201,48 +202,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wX2-tv-IkL" customClass="CVCalendarView" customModule="CVCalendar">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="0lW-Z0-s5E">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <date key="date" timeIntervalSinceReferenceDate="469443109.568349">
+                                    <!--2015-11-17 08:51:49 +0000-->
+                                </date>
                                 <connections>
-                                    <outlet property="calendarAppearanceDelegate" destination="6aa-p9-TmW" id="ZgF-CY-hDt"/>
-                                    <outlet property="calendarDelegate" destination="6aa-p9-TmW" id="1cf-3D-I7u"/>
+                                    <action selector="datePickerChanged:" destination="6aa-p9-TmW" eventType="valueChanged" id="EoD-F9-kcQ"/>
                                 </connections>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2P-8A-Wb6" customClass="CVCalendarMenuView" customModule="CVCalendar">
-                                <rect key="frame" x="0.0" y="20" width="600" height="36"/>
+                            </datePicker>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeP-7w-XGz">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="aHM-K2-3Zr"/>
+                                    <constraint firstAttribute="height" constant="44" id="dNd-Mv-EyG"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="menuViewDelegate" destination="6aa-p9-TmW" id="hQR-JE-Azx"/>
-                                </connections>
-                            </view>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8PW-wO-g6d"/>
+                                    <barButtonItem systemItem="done" id="Nmd-uA-z7v">
+                                        <color key="tintColor" red="0.21176470589999999" green="0.6705882353" blue="0.66274509800000003" alpha="1" colorSpace="deviceRGB"/>
+                                        <connections>
+                                            <action selector="done:" destination="6aa-p9-TmW" id="OEy-nb-IYL"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75r-2N-Z0B">
+                                <rect key="frame" x="20" y="20" width="44.5" height="44"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="wX2-tv-IkL" secondAttribute="trailing" id="2Fs-Km-Lr1"/>
-                            <constraint firstItem="wX2-tv-IkL" firstAttribute="top" secondItem="j2P-8A-Wb6" secondAttribute="bottom" constant="8" id="T3m-6o-J03"/>
-                            <constraint firstAttribute="trailing" secondItem="j2P-8A-Wb6" secondAttribute="trailing" id="YWf-au-9XZ"/>
-                            <constraint firstItem="j2P-8A-Wb6" firstAttribute="top" secondItem="0dS-BD-aL8" secondAttribute="bottom" id="eqF-Sy-ELF"/>
-                            <constraint firstItem="j2P-8A-Wb6" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leading" id="jIw-IJ-JNZ"/>
-                            <constraint firstItem="wX2-tv-IkL" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leading" id="sg8-2s-Wlk"/>
-                            <constraint firstItem="jJV-1O-TAX" firstAttribute="top" secondItem="wX2-tv-IkL" secondAttribute="bottom" id="wVO-Wy-wXQ"/>
+                            <constraint firstItem="0lW-Z0-s5E" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leading" id="6Xq-im-cp4"/>
+                            <constraint firstItem="75r-2N-Z0B" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leadingMargin" id="Dfi-KZ-x4b"/>
+                            <constraint firstAttribute="trailing" secondItem="0lW-Z0-s5E" secondAttribute="trailing" id="JtV-a4-DW4"/>
+                            <constraint firstItem="75r-2N-Z0B" firstAttribute="bottom" secondItem="qeP-7w-XGz" secondAttribute="bottom" id="KI3-fG-0Qg"/>
+                            <constraint firstItem="qeP-7w-XGz" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leading" id="UR1-g8-Yws"/>
+                            <constraint firstItem="0lW-Z0-s5E" firstAttribute="top" secondItem="qeP-7w-XGz" secondAttribute="bottom" id="Ut1-0i-qrV"/>
+                            <constraint firstItem="75r-2N-Z0B" firstAttribute="top" secondItem="qeP-7w-XGz" secondAttribute="top" id="bYG-LF-0eS"/>
+                            <constraint firstItem="jJV-1O-TAX" firstAttribute="top" secondItem="0lW-Z0-s5E" secondAttribute="bottom" id="e93-wF-Gbj"/>
+                            <constraint firstItem="qeP-7w-XGz" firstAttribute="top" secondItem="0dS-BD-aL8" secondAttribute="bottom" id="fIy-sU-SFQ"/>
+                            <constraint firstItem="qeP-7w-XGz" firstAttribute="leading" secondItem="71v-UH-RNv" secondAttribute="leadingMargin" constant="-20" id="ilX-49-bn6"/>
+                            <constraint firstAttribute="trailing" secondItem="qeP-7w-XGz" secondAttribute="trailing" id="stK-yL-jNu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Date" id="dWZ-8A-kOr"/>
                     <connections>
-                        <outlet property="calendarView" destination="wX2-tv-IkL" id="PpS-lE-ZND"/>
-                        <outlet property="menuView" destination="j2P-8A-Wb6" id="j1o-7R-8AU"/>
+                        <outlet property="dateLabel" destination="75r-2N-Z0B" id="BRT-AB-k6f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9U-10-FU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2060" y="467"/>
+            <point key="canvasLocation" x="2060" y="450"/>
         </scene>
     </scenes>
     <resources>

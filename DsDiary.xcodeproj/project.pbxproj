@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A7FE07A274404C372B16737E /* Pods_DsDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08526625DD04265CCE639381 /* Pods_DsDiary.framework */; };
 		C0238F9F1BFAFF1F00015811 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0238F9E1BFAFF1F00015811 /* Diary.swift */; };
+		C0238FA11BFB2B6200015811 /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0238FA01BFB2B6200015811 /* NSDateAdditions.swift */; };
 		C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */; };
 		C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7F1BF5ABED00C39277 /* ViewController.swift */; };
 		C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B811BF5ABED00C39277 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.release.xcconfig"; sourceTree = "<group>"; };
 		B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		C0238F9E1BFAFF1F00015811 /* Diary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		C0238FA01BFB2B6200015811 /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
 		C0734B7A1BF5ABED00C39277 /* DsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0734B7F1BF5ABED00C39277 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */,
 				C0E9AD231BF87AF20052D9E5 /* IntAdditions.swift */,
+				C0238FA01BFB2B6200015811 /* NSDateAdditions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				C0734B861BF5ABED00C39277 /* DsDiary.xcdatamodeld in Sources */,
 				C0E9AD191BF5C1E60052D9E5 /* DiaryViewController.swift in Sources */,
 				C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */,
+				C0238FA11BFB2B6200015811 /* NSDateAdditions.swift in Sources */,
 				C0238F9F1BFAFF1F00015811 /* Diary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
