@@ -1,0 +1,21 @@
+PODS:
+  - CVCalendar (1.2.7)
+  - Dodo (2.0.13)
+  - Realm (0.96.2):
+    - Realm/Headers (= 0.96.2)
+  - Realm/Headers (0.96.2)
+  - RealmSwift (0.96.2):
+    - Realm (= 0.96.2)
+
+DEPENDENCIES:
+  - CVCalendar (~> 1.2.7)
+  - Dodo (~> 2.0)
+  - RealmSwift
+
+SPEC CHECKSUMS:
+  CVCalendar: 1ae6ee62dd7fd4c6a6703a43c641e11dfd32276e
+  Dodo: 0d783bc1f55e59d53fb698b3380ad8553079540e
+  Realm: 3ce8448151c571e90b85002d984d7f93f54fc8a3
+  RealmSwift: 485599fe54e35461c4a0daa7d01d8fbf11424873
+
+COCOAPODS: 0.39.0
