@@ -16,7 +16,7 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dateLabel.textColor = UIColor.secondaryColor()
-        dateLabel.text = NSDate().customFormatDate()
+        dateLabel.text = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +25,7 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func datePickerChanged(sender: UIDatePicker) {
-        dateLabel.text = sender.date.customFormatDate()
+        dateLabel.text = NSDateFormatter.localizedStringFromDate(sender.date, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         if delegate != nil {
             delegate?.saveCalendar(sender.date)
         }

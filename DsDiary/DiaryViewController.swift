@@ -24,7 +24,7 @@ class DiaryViewController: UIViewController {
     
     var date: NSDate = NSDate() {
         didSet {
-            dateLabel.text = date.customFormatDate()
+            dateLabel.text = NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
         }
     }
     
@@ -38,7 +38,7 @@ class DiaryViewController: UIViewController {
             textView.text = diary?.content
         } else {
             textView.becomeFirstResponder()
-            dateLabel.text    = NSDate().customFormatDate()
+            dateLabel.text    = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
             weatherLabel.text = Weathers.Sun.rawValue
         }
         
