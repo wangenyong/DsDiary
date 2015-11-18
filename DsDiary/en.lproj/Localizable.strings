@@ -19,3 +19,5 @@
 "Thurday"   = "Thurday";
 "Friday"    = "Friday";
 "Saturday"  = "Saturday";
+
+"DiaryPlaceholder" = "Enter the diary. Not empty";

@@ -8,11 +8,14 @@
 
 import UIKit
 import RealmSwift
+import Dodo
 
 class DiaryViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
+    
+    let PLACEHOLDER_TEXT = NSLocalizedString("DiaryPlaceholder", comment: "Placehoulder")
     
     var diary: Diary?
     
@@ -38,6 +41,7 @@ class DiaryViewController: UIViewController {
             textView.text = diary?.content
         } else {
             textView.becomeFirstResponder()
+            applyPlaceholderStyle(textView!, placeholderText: PLACEHOLDER_TEXT)
             dateLabel.text    = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
             weatherLabel.text = NSLocalizedString(Weathers.Sun.rawValue, comment: "Sun")
         }
@@ -56,8 +60,6 @@ class DiaryViewController: UIViewController {
         toolbar.setItems(items, animated: false)
         textView.inputAccessoryView = toolbar
         textView.delegate = self
-        
-        
         
         super.viewDidLoad()
     }
@@ -80,6 +82,11 @@ class DiaryViewController: UIViewController {
      日记保存方法
      */
     func diarySave() {
+        guard textView.text != PLACEHOLDER_TEXT  else {
+            textView.textColor = UIColor.orangeColor()
+            return
+        }
+        
         let realm = try! Realm()
         if diary != nil { //对已经保存的日记进行更新
             try! realm.write {
@@ -144,6 +151,27 @@ class DiaryViewController: UIViewController {
     func done() {
         textView.resignFirstResponder()
     }
+    
+    func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)
+    {
+        // make it look (initially) like a placeholder
+        aTextview.textColor = UIColor.lightGrayColor()
+        aTextview.text = placeholderText
+    }
+    
+    func applyNonPlaceholderStyle(aTextview: UITextView)
+    {
+        // make it look like normal text instead of a placeholder
+        aTextview.textColor = UIColor.darkTextColor()
+        aTextview.alpha = 1.0
+    }
+    
+    func moveCursorToStart(aTextView: UITextView)
+    {
+        dispatch_async(dispatch_get_main_queue(), {
+            aTextView.selectedRange = NSMakeRange(0, 0);
+        })
+    }
 
 
 }
@@ -157,6 +185,39 @@ extension DiaryViewController: UIPopoverPresentationControllerDelegate {
 extension DiaryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(textView: UITextView) {
         textView.backgroundColor = UIColor.thirdColor()
+    }
+    
+    func textViewShouldBeginEditing(aTextView: UITextView) -> Bool {
+        if aTextView == textView && aTextView.text == PLACEHOLDER_TEXT
+        {
+            // move cursor to start
+            moveCursorToStart(aTextView)
+        }
+        return true
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        // remove the placeholder text when they start typing
+        // first, see if the field is empty
+        // if it's not empty, then the text should be black and not italic
+        // BUT, we also need to remove the placeholder text if that's the only text
+        // if it is empty, then the text should be the placeholder
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        if newLength > 0 { // have text, so don't show the placeholder
+            // check if the only text is the placeholder and remove it if needed
+            if textView == self.textView && textView.text == PLACEHOLDER_TEXT {
+                if text.utf16.count == 0 { // they hit the back button
+                    return false // ignore it
+                }
+                applyNonPlaceholderStyle(textView)
+                textView.text = ""
+            }
+            return true
+        } else { // no text, so show the placeholder
+            applyPlaceholderStyle(textView, placeholderText: PLACEHOLDER_TEXT)
+            moveCursorToStart(textView)
+            return false
+        }
     }
 }
 

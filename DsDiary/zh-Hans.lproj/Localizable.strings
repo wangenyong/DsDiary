@@ -19,3 +19,5 @@
 "Thurday"   = "星期四";
 "Friday"    = "星期五";
 "Saturday"  = "星期六";
+
+"DiaryPlaceholder" = "请输入日记内容，不能为空噶";
