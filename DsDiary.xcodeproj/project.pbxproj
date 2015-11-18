@@ -10,6 +10,7 @@
 		A7FE07A274404C372B16737E /* Pods_DsDiary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08526625DD04265CCE639381 /* Pods_DsDiary.framework */; };
 		C0238F9F1BFAFF1F00015811 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0238F9E1BFAFF1F00015811 /* Diary.swift */; };
 		C0238FBF1BFC276D00015811 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0238FC11BFC276D00015811 /* DiaryTableViewCell.xib */; };
+		C0238FC51BFC285300015811 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0238FC71BFC285300015811 /* InfoPlist.strings */; };
 		C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */; };
 		C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7F1BF5ABED00C39277 /* ViewController.swift */; };
 		C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B811BF5ABED00C39277 /* Main.storyboard */; };
@@ -31,10 +32,16 @@
 		6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.release.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.release.xcconfig"; sourceTree = "<group>"; };
 		B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DsDiary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DsDiary/Pods-DsDiary.debug.xcconfig"; sourceTree = "<group>"; };
 		C0238F9E1BFAFF1F00015811 /* Diary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
-		C0238FBD1BFC274100015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		C0238FBE1BFC274100015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		C0238FC01BFC276D00015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/DiaryTableViewCell.xib"; sourceTree = "<group>"; };
 		C0238FC21BFC277000015811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DiaryTableViewCell.xib; sourceTree = "<group>"; };
+		C0238FC61BFC285300015811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0238FC91BFC28E300015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0238FCA1BFC291F00015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C0238FCC1BFC293000015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/DiaryTableViewCell.strings; sourceTree = "<group>"; };
+		C0238FCE1BFC293200015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DiaryTableViewCell.strings"; sourceTree = "<group>"; };
+		C0238FD01BFC294000015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		C0238FD11BFC294500015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		C0238FD31BFC294D00015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		C0238FD41BFC294F00015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		C0734B7A1BF5ABED00C39277 /* DsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0734B7F1BF5ABED00C39277 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +129,7 @@
 				C0734B891BF5ABED00C39277 /* LaunchScreen.storyboard */,
 				C0734B8C1BF5ABED00C39277 /* Info.plist */,
 				C0734B841BF5ABED00C39277 /* DsDiary.xcdatamodeld */,
+				C0238FC71BFC285300015811 /* InfoPlist.strings */,
 			);
 			path = DsDiary;
 			sourceTree = "<group>";
@@ -209,6 +217,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = C0734B711BF5ABED00C39277;
 			productRefGroup = C0734B7B1BF5ABED00C39277 /* Products */;
@@ -229,6 +238,7 @@
 				C0734B881BF5ABED00C39277 /* Assets.xcassets in Resources */,
 				C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */,
 				C0238FBF1BFC276D00015811 /* DiaryTableViewCell.xib in Resources */,
+				C0238FC51BFC285300015811 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,17 +318,29 @@
 		C0238FC11BFC276D00015811 /* DiaryTableViewCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C0238FC01BFC276D00015811 /* zh-Hans */,
 				C0238FC21BFC277000015811 /* Base */,
+				C0238FCC1BFC293000015811 /* en */,
+				C0238FCE1BFC293200015811 /* zh-Hans */,
 			);
 			name = DiaryTableViewCell.xib;
+			sourceTree = "<group>";
+		};
+		C0238FC71BFC285300015811 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0238FC61BFC285300015811 /* Base */,
+				C0238FC91BFC28E300015811 /* en */,
+				C0238FCA1BFC291F00015811 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		C0734B811BF5ABED00C39277 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				C0734B821BF5ABED00C39277 /* Base */,
-				C0238FBD1BFC274100015811 /* zh-Hans */,
+				C0238FD01BFC294000015811 /* en */,
+				C0238FD11BFC294500015811 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -327,7 +349,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				C0734B8A1BF5ABED00C39277 /* Base */,
-				C0238FBE1BFC274100015811 /* zh-Hans */,
+				C0238FD31BFC294D00015811 /* en */,
+				C0238FD41BFC294F00015811 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
