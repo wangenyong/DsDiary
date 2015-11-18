@@ -14,7 +14,7 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
-    var isNewDiary = true
+    var diary: Diary?
     
     var weather: Weathers = Weathers.Sun {
         didSet {
@@ -31,14 +31,15 @@ class DiaryViewController: UIViewController {
     var delegate: DiarySavedControllerDelegate?
 
     override func viewDidLoad() {
-        
-        if isNewDiary {
+        if diary != nil {
+            textView.editable = false
+            date          = diary!.date
+            weather       = Weathers(rawValue: diary!.weather)!
+            textView.text = diary?.content
+        } else {
             textView.becomeFirstResponder()
             dateLabel.text    = NSDate().customFormatDate()
             weatherLabel.text = Weathers.Sun.rawValue
-        } else {
-            textView.editable = false
-            
         }
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
@@ -79,23 +80,25 @@ class DiaryViewController: UIViewController {
      日记保存方法
      */
     func diarySave() {
-        let diary     = Diary()
-        let realm     = try! Realm()
-        
-        diary.uuid    = NSUUID().UUIDString
-        diary.content = textView.text
-        diary.weather = weather.rawValue
-        diary.date    = date
-        
-        do {
-            try realm.write {
-                realm.add(diary)
+        let realm = try! Realm()
+        if diary != nil { //对已经保存的日记进行更新
+            try! realm.write {
+                self.diary!.content = self.textView.text
+                self.diary!.weather = self.weather.rawValue
+                self.diary!.date    = self.date
             }
-            
-            self.navigationController?.popViewControllerAnimated(true)
-        } catch {
-            print("can't save")
+        } else { //创建新的日记
+            diary          = Diary()
+            diary!.uuid    = NSUUID().UUIDString
+            diary!.content = textView.text
+            diary!.weather = weather.rawValue
+            diary!.date    = date
+            try! realm.write {
+                realm.add(self.diary!)
+            }
         }
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     /**

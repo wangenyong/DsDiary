@@ -40,9 +40,8 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
             if let indexPath = tableView.indexPathForSelectedRow {
-                //vc.diary = diarys[indexPath.row]
+                vc.diary = diarys[indexPath.row]
             }
-            vc.isNewDiary = false
             vc.delegate = self
       
         } else if segue.identifier == "newDiary" {
