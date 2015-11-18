@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  DsDiary
+
+  Created by wangenyong on 15/11/18.
+  Copyright © 2015年 ___WANGDASHUI___. All rights reserved.
+*/
+
+"Sun"   = "晴";
+"Cloud" = "云";
+"Rain"  = "雨";
+"Snow"  = "雪";
+"Wind"  = "风";
+
+"Sunday"    = "星期日";
+"Monday"    = "星期一";
+"Tuesday"   = "星期二";
+"Wednesday" = "星期三";
+"Thurday"   = "星期四";
+"Friday"    = "星期五";
+"Saturday"  = "星期六";

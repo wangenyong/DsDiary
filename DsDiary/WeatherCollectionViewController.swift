@@ -53,7 +53,7 @@ class WeatherCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Weather", forIndexPath: indexPath) as! WeatherCollectionViewCell
-        cell.label.text = weathers[indexPath.row].rawValue
+        cell.label.text = NSLocalizedString(weathers[indexPath.row].rawValue, comment: "Weather")
         return cell
     }
     

@@ -93,7 +93,7 @@ extension ViewController: UITableViewDataSource {
         cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
         cell.weekdayLabel.text   = weekdayInt.weekDay()
         cell.contentLabel.text   = diary.content
-        cell.weatherLabel.text   = diary.weather
+        cell.weatherLabel.text   = NSLocalizedString(diary.weather, comment: "Weather")
         
         return cell
     }

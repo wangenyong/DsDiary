@@ -12,21 +12,21 @@ extension Int {
     func weekDay() -> String {
         switch self {
         case 1:
-            return "Sunday"
+            return NSLocalizedString("Sunday", comment: "Sunday")
         case 2:
-            return "Monday"
+            return NSLocalizedString("Monday", comment: "Monday")
         case 3:
-            return "Tuesday"
+            return NSLocalizedString("Tuesday", comment: "Tuesday")
         case 4:
-            return "Wednesday"
+            return NSLocalizedString("Wednesday", comment: "Wednesday")
         case 5:
-            return "Thurday"
+            return NSLocalizedString("Thurday", comment: "Thurday")
         case 6:
-            return "Friday"
+            return NSLocalizedString("Friday", comment: "Friday")
         case 7:
-            return "Saturday"
+            return NSLocalizedString("Saturday", comment: "Saturday")
         default:
-            return "not weekday"
+            return NSLocalizedString("not weekday", comment: "not weekday")
         }
         
     }

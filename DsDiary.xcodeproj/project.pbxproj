@@ -11,6 +11,7 @@
 		C0238F9F1BFAFF1F00015811 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0238F9E1BFAFF1F00015811 /* Diary.swift */; };
 		C0238FBF1BFC276D00015811 /* DiaryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0238FC11BFC276D00015811 /* DiaryTableViewCell.xib */; };
 		C0238FC51BFC285300015811 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0238FC71BFC285300015811 /* InfoPlist.strings */; };
+		C0238FD71BFC4F2600015811 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0238FD91BFC4F2600015811 /* Localizable.strings */; };
 		C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */; };
 		C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7F1BF5ABED00C39277 /* ViewController.swift */; };
 		C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B811BF5ABED00C39277 /* Main.storyboard */; };
@@ -42,6 +43,9 @@
 		C0238FD11BFC294500015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		C0238FD31BFC294D00015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		C0238FD41BFC294F00015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		C0238FD81BFC4F2600015811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C0238FDA1BFC4F2800015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C0238FDB1BFC4F2900015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C0734B7A1BF5ABED00C39277 /* DsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0734B7F1BF5ABED00C39277 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				C0734B8C1BF5ABED00C39277 /* Info.plist */,
 				C0734B841BF5ABED00C39277 /* DsDiary.xcdatamodeld */,
 				C0238FC71BFC285300015811 /* InfoPlist.strings */,
+				C0238FD91BFC4F2600015811 /* Localizable.strings */,
 			);
 			path = DsDiary;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0734B8B1BF5ABED00C39277 /* LaunchScreen.storyboard in Resources */,
+				C0238FD71BFC4F2600015811 /* Localizable.strings in Resources */,
 				C0734B881BF5ABED00C39277 /* Assets.xcassets in Resources */,
 				C0734B831BF5ABED00C39277 /* Main.storyboard in Resources */,
 				C0238FBF1BFC276D00015811 /* DiaryTableViewCell.xib in Resources */,
@@ -333,6 +339,16 @@
 				C0238FCA1BFC291F00015811 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C0238FD91BFC4F2600015811 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0238FD81BFC4F2600015811 /* Base */,
+				C0238FDA1BFC4F2800015811 /* en */,
+				C0238FDB1BFC4F2900015811 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		C0734B811BF5ABED00C39277 /* Main.storyboard */ = {

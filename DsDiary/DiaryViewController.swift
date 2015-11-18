@@ -18,7 +18,7 @@ class DiaryViewController: UIViewController {
     
     var weather: Weathers = Weathers.Sun {
         didSet {
-            weatherLabel.text = weather.rawValue
+            weatherLabel.text = NSLocalizedString(weather.rawValue, comment: "Weather") 
         }
     }
     
@@ -39,7 +39,7 @@ class DiaryViewController: UIViewController {
         } else {
             textView.becomeFirstResponder()
             dateLabel.text    = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-            weatherLabel.text = Weathers.Sun.rawValue
+            weatherLabel.text = NSLocalizedString(Weathers.Sun.rawValue, comment: "Sun")
         }
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
