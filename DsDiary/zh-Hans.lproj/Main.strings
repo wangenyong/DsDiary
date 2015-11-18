@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "75r-2N-Z0B"; */
+"75r-2N-Z0B.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "D8z-13-qLO"; */
+"D8z-13-qLO.text" = "Label";
+
+/* Class = "UILabel"; text = "date"; ObjectID = "GYl-R6-xH6"; */
+"GYl-R6-xH6.text" = "date";
+
+/* Class = "UILabel"; text = "weather"; ObjectID = "oJR-CM-uiT"; */
+"oJR-CM-uiT.text" = "weather";
+
+/* Class = "UINavigationItem"; title = "Diary"; ObjectID = "t22-yg-L8W"; */
+"t22-yg-L8W.title" = "日记";
