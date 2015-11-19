@@ -61,6 +61,7 @@ class DiaryViewController: UIViewController {
         textView.inputAccessoryView = toolbar
         textView.delegate = self
         
+        
         super.viewDidLoad()
     }
 

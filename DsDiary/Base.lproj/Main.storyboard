@@ -38,7 +38,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Diary" id="t22-yg-L8W">
-                        <barButtonItem key="leftBarButtonItem" image="Settings" id="rff-sO-4sO"/>
+                        <barButtonItem key="leftBarButtonItem" image="Settings" id="rff-sO-4sO">
+                            <connections>
+                                <segue destination="R7b-yt-fPz" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="rff-sO-4sO" id="HNs-F9-cvJ">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="01a-J1-pNP">
                             <connections>
                                 <segue destination="lpx-rn-l2l" kind="show" identifier="newDiary" id="EeO-dX-4NW"/>
@@ -72,6 +78,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehV-h7-Veh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="405" y="-355"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="G17-K7-9bh">
+            <objects>
+                <tableViewController id="Qh0-bm-iDF" customClass="SettingsTableViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hwK-i2-pGc">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eSO-HD-KTl">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eSO-HD-KTl" id="eus-h9-N7o">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Qh0-bm-iDF" id="8wn-H3-YRp"/>
+                            <outlet property="delegate" destination="Qh0-bm-iDF" id="kgh-RN-GmW"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="j4N-KF-uUD">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="zRc-ha-XnX">
+                            <connections>
+                                <action selector="Cancel:" destination="Qh0-bm-iDF" id="iUQ-Rj-FNv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D0b-cR-Hta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2884" y="-1130"/>
         </scene>
         <!--Diary View Controller-->
         <scene sceneID="mAA-Ob-MVI">
@@ -259,6 +303,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9U-10-FU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2060" y="450"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cEa-SI-4II">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R7b-yt-fPz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qxy-VF-bok">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qh0-bm-iDF" kind="relationship" relationship="rootViewController" id="6i2-P3-QgC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B2Y-DC-kG4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2060" y="-1130"/>
         </scene>
     </scenes>
     <resources>

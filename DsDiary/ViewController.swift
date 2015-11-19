@@ -48,6 +48,11 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: "diarySave")
             vc.delegate = self
+        } else if segue.identifier == "showSettings" {
+            let vc = segue.destinationViewController
+            if let controller = vc.popoverPresentationController {
+                controller.delegate = self
+            }
         }
     }
     
@@ -120,6 +125,12 @@ extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showDiary", sender: tableView)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+}
+
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
 }
 
