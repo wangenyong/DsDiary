@@ -28,22 +28,27 @@ class SettingsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath)
         if selectedCell == pdfExportCell {
-            savePDFFile()
+            let path = savePDFFile()
+            let checkValidation = NSFileManager.defaultManager()
+            if (checkValidation.fileExistsAtPath(path)) {
+                self.performSegueWithIdentifier("showPdfDetail", sender: path)
+
+            }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
-    /*
-    // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showPdfDetail" {
+            let vc = segue.destinationViewController as! PdfDetailViewController
+            vc.path = sender as? String
+        }
     }
-    */
     
-    func savePDFFile() {
+    
+    func savePDFFile() -> String {
         let pdfFileName = "dsdiary.pdf"
         let pdfPath = getDocumentsDirectory().stringByAppendingPathComponent(pdfFileName)
         UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
@@ -59,6 +64,8 @@ class SettingsTableViewController: UITableViewController {
         } while done
         
         UIGraphicsEndPDFContext()
+        
+        return pdfPath
     }
     
     func drawPageNumber(pageNum: Int) {

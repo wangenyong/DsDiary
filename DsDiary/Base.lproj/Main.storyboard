@@ -146,11 +146,47 @@
                     </navigationItem>
                     <connections>
                         <outlet property="pdfExportCell" destination="eSO-HD-KTl" id="ehZ-eW-Tri"/>
+                        <segue destination="z9R-Rb-2Te" kind="show" identifier="showPdfDetail" id="Lm6-Ol-lBe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D0b-cR-Hta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2884" y="-1130"/>
+        </scene>
+        <!--Pdf Detail View Controller-->
+        <scene sceneID="qsQ-1O-DCL">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="z9R-Rb-2Te" customClass="PdfDetailViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="83a-Ft-Eja"/>
+                        <viewControllerLayoutGuide type="bottom" id="9gm-MG-mJ6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xis-A9-ou5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdr-nF-ifN">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9gm-MG-mJ6" firstAttribute="top" secondItem="fdr-nF-ifN" secondAttribute="bottom" id="EAC-Dv-YxD"/>
+                            <constraint firstItem="fdr-nF-ifN" firstAttribute="leading" secondItem="xis-A9-ou5" secondAttribute="leading" id="R6P-eg-kpM"/>
+                            <constraint firstItem="fdr-nF-ifN" firstAttribute="top" secondItem="83a-Ft-Eja" secondAttribute="bottom" id="Tej-pp-QLn"/>
+                            <constraint firstAttribute="trailing" secondItem="fdr-nF-ifN" secondAttribute="trailing" id="cYg-j9-5bU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="fdr-nF-ifN" id="DQE-9K-7xk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L3t-GS-y6D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3715" y="-1130"/>
         </scene>
         <!--Diary View Controller-->
         <scene sceneID="mAA-Ob-MVI">
