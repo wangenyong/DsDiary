@@ -49,10 +49,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: "diarySave")
             vc.delegate = self
         } else if segue.identifier == "showSettings" {
-            let vc = segue.destinationViewController
-            if let controller = vc.popoverPresentationController {
-                controller.delegate = self
-            }
+            //let vc = segue.destinationViewController
         }
     }
     
@@ -128,9 +125,4 @@ extension ViewController: UITableViewDelegate {
     }
 }
 
-extension ViewController: UIPopoverPresentationControllerDelegate {
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
-    }
-}
 
