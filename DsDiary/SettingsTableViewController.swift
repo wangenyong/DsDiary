@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var pdfExportCell: UITableViewCell!
+    
+    let diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +50,19 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    
+    /**
+     生成并保存 pdf 文件
+     
+     - returns: 文件的路径
+     */
     func savePDFFile() -> String {
+        let cfstring = NSDateFormatter.localizedStringFromDate(diarys[0].date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diarys[0].weather, comment: "Weather") + "\n" + diarys[0].content
+        let currentText = CFAttributedStringCreate(nil, cfstring, nil)
+        let framesetter = CTFramesetterCreateWithAttributedString(currentText)
+        
         let pdfFileName = "dsdiary.pdf"
         let pdfPath = getDocumentsDirectory().stringByAppendingPathComponent(pdfFileName)
+        // Create the PDF context using the default page size of 612 x 792.
         UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
         
         var currentRange = CFRangeMake(0, 0)
@@ -58,16 +70,69 @@ class SettingsTableViewController: UITableViewController {
         var done = false
         
         repeat {
+            // Mark the beginning of a new page.
             UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+            // Draw a page number at the bottom of each page.
             currentPage++
             drawPageNumber(currentPage)
-        } while done
+            // Render the current page and update the current range to
+            // point to the beginning of the next page.
+            currentRange = drawText(currentRange, framesetter: framesetter)
+            // If we're at the end of the text, exit the loop.
+            if currentRange.location == CFAttributedStringGetLength(currentText) {
+                done = true
+            }
+        
+        } while !done
         
         UIGraphicsEndPDFContext()
         
         return pdfPath
     }
     
+    
+    /**
+     在pdf页面中绘制文本内容
+     
+     - parameter currentRange: CFRange
+     - parameter framesetter:  CTFramesetterRef
+     
+     - returns: CFRange
+     */
+    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef) -> CFRange {
+        //Get the graphics context.
+        let currentContext = UIGraphicsGetCurrentContext()
+        // Put the text matrix into a known state. This ensures
+        // that no old scaling factors are left in place.
+        CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
+        // Core Text draws from the bottom-left corner up, so flip
+        // the current transform prior to drawing.
+        CGContextTranslateCTM(currentContext, 0, 792)
+        CGContextScaleCTM(currentContext, 1.0, -1.0)
+        // Create a path object to enclose the text. Use 72 point
+        // margins all around the text.
+        let frameRect = CGRectMake(72, 72, 468, 648)
+        let framePath = CGPathCreateMutable()
+        CGPathAddRect(framePath, nil, frameRect)
+        // Get the frame that will do the rendering.
+        // The currentRange variable specifies only the starting point. The framesetter
+        // lays out as much text as will fit into the frame.    
+        let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
+        // Draw the frame.
+        CTFrameDraw(frameRef, currentContext!)
+        // Update the current range based on what was drawn.
+        currentRange = CTFrameGetVisibleStringRange(frameRef)
+        currentRange.location += currentRange.length
+        currentRange.length = 0
+        return currentRange
+    }
+    
+    
+    /**
+     在pdf页面底部绘制页码
+     
+     - parameter pageNum: 页码
+     */
     func drawPageNumber(pageNum: Int) {
         let pageString = "Page \(pageNum)" as NSString
         let font = UIFont.systemFontOfSize(12)
@@ -82,6 +147,12 @@ class SettingsTableViewController: UITableViewController {
         pageString.drawInRect(stringRect, withAttributes: [NSFontAttributeName : font])
     }
     
+    
+    /**
+     获取沙盒 documents 目录
+     
+     - returns: documents 路径
+     */
     func getDocumentsDirectory() -> NSString {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let documentsDirectory = paths[0]
