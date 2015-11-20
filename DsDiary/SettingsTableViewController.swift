@@ -56,35 +56,51 @@ class SettingsTableViewController: UITableViewController {
      - returns: 文件的路径
      */
     func savePDFFile() -> String {
-        let cfstring = NSDateFormatter.localizedStringFromDate(diarys[0].date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diarys[0].weather, comment: "Weather") + "\n" + diarys[0].content
-        let currentText = CFAttributedStringCreate(nil, cfstring, nil)
-        let framesetter = CTFramesetterCreateWithAttributedString(currentText)
-        
         let pdfFileName = "dsdiary.pdf"
         let pdfPath = getDocumentsDirectory().stringByAppendingPathComponent(pdfFileName)
         // Create the PDF context using the default page size of 612 x 792.
         UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
-        
-        var currentRange = CFRangeMake(0, 0)
         var currentPage = 0
-        var done = false
-        
-        repeat {
-            // Mark the beginning of a new page.
-            UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-            // Draw a page number at the bottom of each page.
-            currentPage++
-            drawPageNumber(currentPage)
-            // Render the current page and update the current range to
-            // point to the beginning of the next page.
-            currentRange = drawText(currentRange, framesetter: framesetter)
-            // If we're at the end of the text, exit the loop.
-            if currentRange.location == CFAttributedStringGetLength(currentText) {
-                done = true
+        var startHeight: CGFloat = 72.0
+        var newPage = true
+        var turnY = true
+        for diary in diarys {
+            let cfstring = NSDateFormatter.localizedStringFromDate(diary.date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diary.weather, comment: "Weather") + "\n" + diary.content
+            let currentText = CFAttributedStringCreate(nil, cfstring, nil)
+            let framesetter = CTFramesetterCreateWithAttributedString(currentText)
+            var currentRange = CFRangeMake(0, 0)
+            var done = true
+            if startHeight > 700.0 {
+                newPage = true
+                startHeight = 72.0
+                turnY = true
             }
-        
-        } while !done
-        
+            repeat {
+                if newPage {
+                    // Mark the beginning of a new page.
+                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+                    // Draw a page number at the bottom of each page.
+                    currentPage++
+                    drawPageNumber(currentPage)
+                }
+                // Render the current page and update the current range to
+                // point to the beginning of the next page.
+                let result = drawText(currentRange, framesetter: framesetter, startHight: startHeight, turnY: turnY)
+                
+                currentRange = result.range
+                // If we're at the end of the text, exit the loop.
+                if currentRange.location == CFAttributedStringGetLength(currentText) {
+                    newPage = false
+                    startHeight += (result.heght + 16)
+                    turnY = false
+                } else {
+                    newPage = true
+                    done = false
+                    startHeight = 72.0
+                }
+                
+            } while !done
+        }
         UIGraphicsEndPDFContext()
         
         return pdfPath
@@ -99,19 +115,21 @@ class SettingsTableViewController: UITableViewController {
      
      - returns: CFRange
      */
-    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef) -> CFRange {
+    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef, startHight: CGFloat, turnY: Bool) -> (heght: CGFloat, range: CFRange) {
         //Get the graphics context.
         let currentContext = UIGraphicsGetCurrentContext()
-        // Put the text matrix into a known state. This ensures
-        // that no old scaling factors are left in place.
-        CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
-        // Core Text draws from the bottom-left corner up, so flip
-        // the current transform prior to drawing.
-        CGContextTranslateCTM(currentContext, 0, 792)
-        CGContextScaleCTM(currentContext, 1.0, -1.0)
+        if turnY {
+            // Put the text matrix into a known state. This ensures
+            // that no old scaling factors are left in place.
+            CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
+            // Core Text draws from the bottom-left corner up, so flip
+            // the current transform prior to drawing.
+            CGContextTranslateCTM(currentContext, 0, 648)
+            CGContextScaleCTM(currentContext, 1.0, -1.0)
+        }
         // Create a path object to enclose the text. Use 72 point
         // margins all around the text.
-        let frameRect = CGRectMake(72, 72, 468, 648)
+        let frameRect = CGRectMake(72, -startHight, 468, 648)
         let framePath = CGPathCreateMutable()
         CGPathAddRect(framePath, nil, frameRect)
         // Get the frame that will do the rendering.
@@ -121,10 +139,23 @@ class SettingsTableViewController: UITableViewController {
         // Draw the frame.
         CTFrameDraw(frameRef, currentContext!)
         // Update the current range based on what was drawn.
+        let lineArray = CTFrameGetLines(frameRef)
+        let lineCount = CFArrayGetCount(lineArray)
+        var heigh: CGFloat = 0
+        var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
+        
+        for var j = 0; j < lineCount; j++ {
+            let currentLine = unsafeBitCast(CFArrayGetValueAtIndex(lineArray, j), CTLine.self)
+            CTLineGetTypographicBounds(currentLine, &ascent, &descent, &leading)
+            let h = ascent + descent + leading
+            heigh += h
+        }
+        print("height: \(heigh)")
+        
         currentRange = CTFrameGetVisibleStringRange(frameRef)
         currentRange.location += currentRange.length
         currentRange.length = 0
-        return currentRange
+        return (heigh, currentRange)
     }
     
     
