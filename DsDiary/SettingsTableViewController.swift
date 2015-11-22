@@ -58,59 +58,36 @@ class SettingsTableViewController: UITableViewController {
     func savePDFFile() -> String {
         let pdfFileName = "dsdiary.pdf"
         let pdfPath = getDocumentsDirectory().stringByAppendingPathComponent(pdfFileName)
+        let currentText: NSMutableAttributedString = NSMutableAttributedString(string: "")
+        for diary in diarys {
+            let cfstring = (NSDateFormatter.localizedStringFromDate(diary.date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diary.weather, comment: "Weather") + "    \n" + diary.content + "\n\n\n")
+            let attrstring = NSMutableAttributedString(string: cfstring)
+            attrstring.addAttribute(kCTForegroundColorAttributeName as String, value: UIColor.secondaryColor(), range: NSMakeRange(0, 19))
+            currentText.appendAttributedString(attrstring)
+        }
+
+        let framesetter = CTFramesetterCreateWithAttributedString(currentText)
+        var currentRange = CFRangeMake(0, 0)
         // Create the PDF context using the default page size of 612 x 792.
         UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
         var currentPage = 0
-        var startHeight: CGFloat = 72.0
-        var turnY = true
+        var done = false
+        repeat {
+            // Mark the beginning of a new page.
+            UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+            // Draw a page number at the bottom of each page.
+            currentPage++
+            drawPageNumber(currentPage)
+            // Render the current page and update the current range to
+            // point to the beginning of the next page.
+            currentRange = drawText(currentRange, framesetter: framesetter)
+            // If we're at the end of the text, exit the loop.
+            if currentRange.location == CFAttributedStringGetLength(currentText) {
+                done = true
+            }
+        } while !done
         
-        // Mark the beginning of a new page.
-        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-        // Draw a page number at the bottom of each page.
-        currentPage++
-        drawPageNumber(currentPage)
-        
-        for diary in diarys {
-            let cfstring = NSDateFormatter.localizedStringFromDate(diary.date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diary.weather, comment: "Weather") + "\n" + diary.content
-            let currentText = CFAttributedStringCreate(nil, cfstring, nil)
-            let framesetter = CTFramesetterCreateWithAttributedString(currentText)
-            var currentRange = CFRangeMake(0, 0)
-            
-            var done = true
-            repeat {
-                // Render the current page and update the current range to
-                // point to the beginning of the next page.
-                let result = drawText(currentRange, framesetter: framesetter, startHight: startHeight, turnY: turnY)
-                
-                currentRange = result.range
-                startHeight += (result.heght + 8.0)
-                // If we're at the end of the text, exit the loop.
-                if currentRange.location != CFAttributedStringGetLength(currentText) {
-                    done = false
-                    // Mark the beginning of a new page.
-                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-                    // Draw a page number at the bottom of each page.
-                    currentPage++
-                    drawPageNumber(currentPage)
-                    turnY = true
-                    startHeight = 72.0
-                } else if startHeight > 648.0 {
-                    done = true
-                    // Mark the beginning of a new page.
-                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-                    // Draw a page number at the bottom of each page.
-                    currentPage++
-                    drawPageNumber(currentPage)
-                    turnY = true
-                    startHeight = 72.0
-                } else {
-                    done = true
-                    turnY = false
-                }
-            } while !done
-        }
         UIGraphicsEndPDFContext()
-        
         return pdfPath
     }
     
@@ -123,23 +100,19 @@ class SettingsTableViewController: UITableViewController {
      
      - returns: CFRange
      */
-    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef, startHight: CGFloat, turnY: Bool) -> (heght: CGFloat, range: CFRange) {
+    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef) -> CFRange {
         //Get the graphics context.
         let currentContext = UIGraphicsGetCurrentContext()
         // Put the text matrix into a known state. This ensures
         // that no old scaling factors are left in place.
         CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
-        
-        if turnY {
-            // Core Text draws from the bottom-left corner up, so flip
-            // the current transform prior to drawing.
-            CGContextTranslateCTM(currentContext, 0, 648)
-            CGContextScaleCTM(currentContext, 1.0, -1.0)
-        }
-        
+        // Core Text draws from the bottom-left corner up, so flip
+        // the current transform prior to drawing.
+        CGContextTranslateCTM(currentContext, 0, 648)
+        CGContextScaleCTM(currentContext, 1.0, -1.0)
         // Create a path object to enclose the text. Use 72 point
         // margins all around the text.
-        let frameRect = CGRectMake(72, -startHight, 468, 648)
+        let frameRect = CGRectMake(72, -72, 468, 648)
         let framePath = CGPathCreateMutable()
         CGPathAddRect(framePath, nil, frameRect)
         // Get the frame that will do the rendering.
@@ -148,24 +121,12 @@ class SettingsTableViewController: UITableViewController {
         let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         // Draw the frame.
         CTFrameDraw(frameRef, currentContext!)
-        // Get the actural height that text on draw
-        let lineArray = CTFrameGetLines(frameRef)
-        let lineCount = CFArrayGetCount(lineArray)
-        var heigh: CGFloat = 0
-        var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
-        for var j = 0; j < lineCount; j++ {
-            let currentLine = unsafeBitCast(CFArrayGetValueAtIndex(lineArray, j), CTLine.self)
-            CTLineGetTypographicBounds(currentLine, &ascent, &descent, &leading)
-            let h = ascent + descent + leading
-            heigh += h
-        }
-        print("height: \(heigh)")
         // Update the current range based on what was drawn.
         currentRange = CTFrameGetVisibleStringRange(frameRef)
         currentRange.location += currentRange.length
         currentRange.length = 0
         
-        return (heigh, currentRange)
+        return currentRange
     }
     
     
@@ -175,7 +136,7 @@ class SettingsTableViewController: UITableViewController {
      - parameter pageNum: 页码
      */
     func drawPageNumber(pageNum: Int) {
-        let pageString = "Page \(pageNum)" as NSString
+        let pageString =  NSLocalizedString("Page", comment: "Page") + " \(pageNum)" as NSString
         let font = UIFont.systemFontOfSize(12)
         let maxSize = CGSizeMake(612, 72)
         
