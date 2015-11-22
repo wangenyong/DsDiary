@@ -62,43 +62,51 @@ class SettingsTableViewController: UITableViewController {
         UIGraphicsBeginPDFContextToFile(pdfPath, CGRectZero, nil)
         var currentPage = 0
         var startHeight: CGFloat = 72.0
-        var newPage = true
         var turnY = true
+        
+        // Mark the beginning of a new page.
+        UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+        // Draw a page number at the bottom of each page.
+        currentPage++
+        drawPageNumber(currentPage)
+        
         for diary in diarys {
             let cfstring = NSDateFormatter.localizedStringFromDate(diary.date, dateStyle: .MediumStyle, timeStyle: .ShortStyle) + " " + NSLocalizedString(diary.weather, comment: "Weather") + "\n" + diary.content
             let currentText = CFAttributedStringCreate(nil, cfstring, nil)
             let framesetter = CTFramesetterCreateWithAttributedString(currentText)
             var currentRange = CFRangeMake(0, 0)
+            
             var done = true
-            if startHeight > 700.0 {
-                newPage = true
-                startHeight = 72.0
-                turnY = true
-            }
             repeat {
-                if newPage {
-                    // Mark the beginning of a new page.
-                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
-                    // Draw a page number at the bottom of each page.
-                    currentPage++
-                    drawPageNumber(currentPage)
-                }
                 // Render the current page and update the current range to
                 // point to the beginning of the next page.
                 let result = drawText(currentRange, framesetter: framesetter, startHight: startHeight, turnY: turnY)
                 
                 currentRange = result.range
+                startHeight += (result.heght + 8.0)
                 // If we're at the end of the text, exit the loop.
-                if currentRange.location == CFAttributedStringGetLength(currentText) {
-                    newPage = false
-                    startHeight += (result.heght + 16)
-                    turnY = false
-                } else {
-                    newPage = true
+                if currentRange.location != CFAttributedStringGetLength(currentText) {
                     done = false
+                    // Mark the beginning of a new page.
+                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+                    // Draw a page number at the bottom of each page.
+                    currentPage++
+                    drawPageNumber(currentPage)
+                    turnY = true
                     startHeight = 72.0
+                } else if startHeight > 648.0 {
+                    done = true
+                    // Mark the beginning of a new page.
+                    UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
+                    // Draw a page number at the bottom of each page.
+                    currentPage++
+                    drawPageNumber(currentPage)
+                    turnY = true
+                    startHeight = 72.0
+                } else {
+                    done = true
+                    turnY = false
                 }
-                
             } while !done
         }
         UIGraphicsEndPDFContext()
@@ -118,15 +126,17 @@ class SettingsTableViewController: UITableViewController {
     func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef, startHight: CGFloat, turnY: Bool) -> (heght: CGFloat, range: CFRange) {
         //Get the graphics context.
         let currentContext = UIGraphicsGetCurrentContext()
+        // Put the text matrix into a known state. This ensures
+        // that no old scaling factors are left in place.
+        CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
+        
         if turnY {
-            // Put the text matrix into a known state. This ensures
-            // that no old scaling factors are left in place.
-            CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity)
             // Core Text draws from the bottom-left corner up, so flip
             // the current transform prior to drawing.
             CGContextTranslateCTM(currentContext, 0, 648)
             CGContextScaleCTM(currentContext, 1.0, -1.0)
         }
+        
         // Create a path object to enclose the text. Use 72 point
         // margins all around the text.
         let frameRect = CGRectMake(72, -startHight, 468, 648)
@@ -138,12 +148,11 @@ class SettingsTableViewController: UITableViewController {
         let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil)
         // Draw the frame.
         CTFrameDraw(frameRef, currentContext!)
-        // Update the current range based on what was drawn.
+        // Get the actural height that text on draw
         let lineArray = CTFrameGetLines(frameRef)
         let lineCount = CFArrayGetCount(lineArray)
         var heigh: CGFloat = 0
         var ascent: CGFloat = 0, descent: CGFloat = 0, leading: CGFloat = 0
-        
         for var j = 0; j < lineCount; j++ {
             let currentLine = unsafeBitCast(CFArrayGetValueAtIndex(lineArray, j), CTLine.self)
             CTLineGetTypographicBounds(currentLine, &ascent, &descent, &leading)
@@ -151,10 +160,11 @@ class SettingsTableViewController: UITableViewController {
             heigh += h
         }
         print("height: \(heigh)")
-        
+        // Update the current range based on what was drawn.
         currentRange = CTFrameGetVisibleStringRange(frameRef)
         currentRange.location += currentRange.length
         currentRange.length = 0
+        
         return (heigh, currentRange)
     }
     
