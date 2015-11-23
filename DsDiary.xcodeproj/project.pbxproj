@@ -20,6 +20,7 @@
 		C0734B861BF5ABED00C39277 /* DsDiary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0734B841BF5ABED00C39277 /* DsDiary.xcdatamodeld */; };
 		C0734B881BF5ABED00C39277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0734B871BF5ABED00C39277 /* Assets.xcassets */; };
 		C0734B8B1BF5ABED00C39277 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0734B891BF5ABED00C39277 /* LaunchScreen.storyboard */; };
+		C0DE48CA1C02F6E800783F6F /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE48C91C02F6E800783F6F /* AuthenticationViewController.swift */; };
 		C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */; };
 		C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD131BF5B4A70052D9E5 /* DiaryTableViewCell.swift */; };
 		C0E9AD191BF5C1E60052D9E5 /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9AD181BF5C1E60052D9E5 /* DiaryViewController.swift */; };
@@ -58,6 +59,7 @@
 		C0734B871BF5ABED00C39277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0734B8A1BF5ABED00C39277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0734B8C1BF5ABED00C39277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0DE48C91C02F6E800783F6F /* AuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorAdditions.swift; sourceTree = "<group>"; };
 		C0E9AD131BF5B4A70052D9E5 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		C0E9AD181BF5C1E60052D9E5 /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				C0E9AD211BF5D75A0052D9E5 /* CalendarViewController.swift */,
 				C0238FDC1BFD5A0600015811 /* SettingsTableViewController.swift */,
 				C06AD6DC1BFDC60F00052841 /* PdfDetailViewController.swift */,
+				C0DE48C91C02F6E800783F6F /* AuthenticationViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				C0E9AD241BF87AF20052D9E5 /* IntAdditions.swift in Sources */,
 				C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */,
 				C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */,
+				C0DE48CA1C02F6E800783F6F /* AuthenticationViewController.swift in Sources */,
 				C0E9AD1C1BF5CEF10052D9E5 /* Weathers.swift in Sources */,
 				C0E9AD1E1BF5D42F0052D9E5 /* WeatherCollectionViewController.swift in Sources */,
 				C0E9AD111BF5B0150052D9E5 /* UIColorAdditions.swift in Sources */,
