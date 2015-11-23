@@ -8,12 +8,13 @@
 
 import UIKit
 import RealmSwift
+import LocalAuthentication
 
 class ViewController: UIViewController, DiarySavedControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     let realm = try! Realm()
-    let diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
+    var diarys: Results<Diary>?
     var notificationToken: NotificationToken?
 
     override func viewDidLoad() {
@@ -26,6 +27,9 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
         }
+        
+        authenticateUser()
+
     }
     
 
@@ -35,12 +39,50 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     }
     
     
+    func authenticateUser() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+            
+            context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
+                [unowned self] (success: Bool, authenticationError: NSError?) -> Void in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if success {
+                        self.diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
+                        self.tableView.reloadData()
+                    } else {
+                        if let error = authenticationError {
+                            if error.code == LAError.UserFallback.rawValue {
+                                let ac = UIAlertController(title: "Passcode? Ha!", message: "It's Touch ID or nothing – sorry!", preferredStyle: .Alert)
+                                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                                self.presentViewController(ac, animated: true, completion: nil)
+                                return
+                            }
+                        }
+                        
+                        let ac = UIAlertController(title: "Authentication failed", message: "Your fingerprint could not be verified; please try again.", preferredStyle: .Alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                        self.presentViewController(ac, animated: true, completion: nil)
+                    }
+                }
+                
+            }
+            
+        } else {
+            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.presentViewController(ac, animated: true, completion: nil)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDiary" {
             let vc = segue.destinationViewController as! DiaryViewController
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
             if let indexPath = tableView.indexPathForSelectedRow {
-                vc.diary = diarys[indexPath.row]
+                vc.diary = diarys![indexPath.row]
             }
             vc.delegate = self
       
@@ -70,7 +112,12 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return diarys.count
+        if diarys != nil {
+            return diarys!.count
+        } else  {
+            return 0
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -82,20 +129,22 @@ extension ViewController: UITableViewDataSource {
             cell.contentView.backgroundColor = UIColor.whiteColor()
         }
         
-        let diary = diarys[indexPath.row]
-        
-        let date       = diary.date
-        let calendar   = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date))!
-        let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date))!
-        let YearInt    = (calendar?.component(NSCalendarUnit.Year, fromDate: date))!
-        let weekdayInt = (calendar?.component(NSCalendarUnit.Weekday, fromDate: date))!
-        
-        cell.dayLabel.text       = "\(DayInt)"
-        cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
-        cell.weekdayLabel.text   = weekdayInt.weekDay()
-        cell.contentLabel.text   = diary.content
-        cell.weatherLabel.text   = NSLocalizedString(diary.weather, comment: "Weather")
+        if diarys != nil {
+            let diary = diarys![indexPath.row]
+            
+            let date       = diary.date
+            let calendar   = NSCalendar.init(calendarIdentifier: NSCalendarIdentifierGregorian)
+            let DayInt     = (calendar?.component(NSCalendarUnit.Day, fromDate: date))!
+            let MonthInt   = (calendar?.component(NSCalendarUnit.Month, fromDate: date))!
+            let YearInt    = (calendar?.component(NSCalendarUnit.Year, fromDate: date))!
+            let weekdayInt = (calendar?.component(NSCalendarUnit.Weekday, fromDate: date))!
+            
+            cell.dayLabel.text       = "\(DayInt)"
+            cell.monthYearLabel.text = "\(MonthInt)/\(YearInt)"
+            cell.weekdayLabel.text   = weekdayInt.weekDay()
+            cell.contentLabel.text   = diary.content
+            cell.weatherLabel.text   = NSLocalizedString(diary.weather, comment: "Weather")
+        }
         
         return cell
     }
@@ -111,7 +160,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             try! realm.write {
-                self.realm.delete(self.diarys[indexPath.row])
+                self.realm.delete(self.diarys![indexPath.row])
             }
         }
     }
