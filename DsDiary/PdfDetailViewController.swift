@@ -14,6 +14,8 @@ class PdfDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "shareTapped")
 
         if path != nil {
             let url = NSURL.fileURLWithPath(path!)
@@ -27,6 +29,14 @@ class PdfDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func shareTapped() {
+        if path != nil {
+            let url = NSURL.fileURLWithPath(path!)
+            let vc = UIActivityViewController(activityItems: [url], applicationActivities: [])
+            presentViewController(vc, animated: true, completion: nil)
+        }
+
+    }
 
     /*
     // MARK: - Navigation
