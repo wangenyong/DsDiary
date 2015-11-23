@@ -243,6 +243,7 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="GYl-R6-xH6" id="lT1-TQ-UqW"/>
+                        <outlet property="keyboardHeight" destination="c4z-gY-WoI" id="MNB-id-9dE"/>
                         <outlet property="textView" destination="pOH-8m-Z0u" id="tSM-vf-lDY"/>
                         <outlet property="weatherLabel" destination="oJR-CM-uiT" id="AKn-c0-4zC"/>
                     </connections>

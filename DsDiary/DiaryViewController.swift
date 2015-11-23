@@ -15,6 +15,8 @@ class DiaryViewController: UIViewController {
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
+    @IBOutlet weak var keyboardHeight: NSLayoutConstraint!
+    
     let PLACEHOLDER_TEXT = NSLocalizedString("DiaryPlaceholder", comment: "Placehoulder")
     
     var diary: Diary?
@@ -61,8 +63,10 @@ class DiaryViewController: UIViewController {
         textView.inputAccessoryView = toolbar
         textView.delegate = self
         
-        
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -173,8 +177,28 @@ class DiaryViewController: UIViewController {
             aTextView.selectedRange = NSMakeRange(0, 0);
         })
     }
-
-
+    
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        if duration != nil && keyboardHeight != nil {
+            keyboardHeight.constant = keyboardSize!.size.height
+            UIView.animateWithDuration(duration!, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        let duration = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
+        if duration != nil {
+            keyboardHeight.constant = 0
+            UIView.animateWithDuration(duration!, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
 }
 
 extension DiaryViewController: UIPopoverPresentationControllerDelegate {
