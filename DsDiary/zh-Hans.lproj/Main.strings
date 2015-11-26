@@ -5,11 +5,21 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "D8z-13-qLO"; */
 "D8z-13-qLO.text" = "Label";
 
+/* Class = "UIButton"; normalTitle = "Click to unlock"; ObjectID = "Fkf-x9-1kT"; */
+"Fkf-x9-1kT.normalTitle" = "Click to unlock";
+
 /* Class = "UILabel"; text = "date"; ObjectID = "GYl-R6-xH6"; */
 "GYl-R6-xH6.text" = "date";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "j4N-KF-uUD"; */
+"j4N-KF-uUD.title" = "设置";
 
 /* Class = "UILabel"; text = "weather"; ObjectID = "oJR-CM-uiT"; */
 "oJR-CM-uiT.text" = "weather";
 
 /* Class = "UINavigationItem"; title = "Diary"; ObjectID = "t22-yg-L8W"; */
 "t22-yg-L8W.title" = "日记";
+
+/* Class = "UILabel"; text = "Export to PDF"; ObjectID = "tZl-Ar-kr3"; */
+"tZl-Ar-kr3.text" = "导出为 PDF 文件";
+
