@@ -6,12 +6,14 @@
   Copyright © 2015年 ___WANGDASHUI___. All rights reserved.
 */
 
+// 天气
 "Sun"   = "晴";
 "Cloud" = "云";
 "Rain"  = "雨";
 "Snow"  = "雪";
 "Wind"  = "风";
 
+// 星期
 "Sunday"    = "星期日";
 "Monday"    = "星期一";
 "Tuesday"   = "星期二";
@@ -20,6 +22,20 @@
 "Friday"    = "星期五";
 "Saturday"  = "星期六";
 
-"DiaryPlaceholder" = "请输入日记内容，不能为空噶";
+// 日记输入提示信息
+"DiaryPlaceholder" = "请输入日记内容，不能为空";
 
+// PDF页码
 "Page" = "页码";
+
+// 验证信息
+"Identify" = "请使用指纹验证！";
+// 验证失败
+"Authentication failed" = "验证失败！";
+"Authentication failed info" = "您的指纹信息错误，请重试。";
+// 密码尝试
+"Password try" = "密码？";
+"Password try info" = "抱歉这里只支持指纹验证。";
+// Touch ID不可用
+"No Touch ID" = "Touch ID 不可用";
+"No touch ID info" = "抱歉您的设备不支持指纹验证功能。";

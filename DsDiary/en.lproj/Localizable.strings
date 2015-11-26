@@ -6,12 +6,14 @@
   Copyright © 2015年 ___WANGDASHUI___. All rights reserved.
 */
 
+// Weather
 "Sun"   = "Sun";
 "Cloud" = "Cloud";
 "Rain"  = "Rain";
 "Snow"  = "Snow";
 "Wind"  = "Wind";
 
+// Weeken Day
 "Sunday"    = "Sunday";
 "Monday"    = "Monday";
 "Tuesday"   = "Tuesday";
@@ -20,6 +22,20 @@
 "Friday"    = "Friday";
 "Saturday"  = "Saturday";
 
+// Diary input placeholder
 "DiaryPlaceholder" = "Enter the diary. Not empty";
 
+// PDF page
 "Page" = "Page";
+
+// Identify Reason
+"Identify" = "Identify yourself!";
+// Authentication failed
+"Authentication failed" = "Authentication failed!";
+"Authentication failed info" = "Your fingerprint could not be verified; please try again.";
+// Password try
+"Password try" = "Passcode? Ha!";
+"Password try info" = "It's Touch ID or nothing – sorry!";
+// No Touch ID
+"No Touch ID" = "Touch ID not available";
+"No touch ID info" = "Your device is not configured for Touch ID.";

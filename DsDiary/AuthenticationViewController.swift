@@ -24,12 +24,17 @@ class AuthenticationViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /**
+     对用户进行指纹验证
+     
+     - parameter sender: 指纹按钮
+     */
     @IBAction func authenticateUser(sender: UIButton) {
         let context = LAContext()
         var error: NSError?
-        
+        // 判断是否支持指纹验证
         if context.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Identify yourself!"
+            let reason = NSLocalizedString("Identify", comment: "Identify")
             
             context.evaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {
                 [unowned self] (success: Bool, authenticationError: NSError?) -> Void in
@@ -39,14 +44,14 @@ class AuthenticationViewController: UIViewController {
                     } else {
                         if let error = authenticationError {
                             if error.code == LAError.UserFallback.rawValue {
-                                let ac = UIAlertController(title: "Passcode? Ha!", message: "It's Touch ID or nothing – sorry!", preferredStyle: .Alert)
+                                let ac = UIAlertController(title: NSLocalizedString("Password try", comment: "Password try"), message: NSLocalizedString("Password try info", comment: "Password try info"), preferredStyle: .Alert)
                                 ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                                 self.presentViewController(ac, animated: true, completion: nil)
                                 return
                             }
                         }
                         
-                        let ac = UIAlertController(title: "Authentication failed", message: "Your fingerprint could not be verified; please try again.", preferredStyle: .Alert)
+                        let ac = UIAlertController(title: NSLocalizedString("Authentication failed", comment: "Authentication failed"), message: NSLocalizedString("Authentication failed info", comment: "Authentication failed info"), preferredStyle: .Alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                         self.presentViewController(ac, animated: true, completion: nil)
                     }
@@ -55,20 +60,10 @@ class AuthenticationViewController: UIViewController {
             }
             
         } else {
-            let ac = UIAlertController(title: "Touch ID not available", message: "Your device is not configured for Touch ID.", preferredStyle: .Alert)
+            let ac = UIAlertController(title: NSLocalizedString("No Touch ID", comment: "No Touch ID"), message: NSLocalizedString("No touch ID info", comment: "No touch ID info"), preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(ac, animated: true, completion: nil)
         }        
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

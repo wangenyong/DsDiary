@@ -6,7 +6,7 @@
 "D8z-13-qLO.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Click to unlock"; ObjectID = "Fkf-x9-1kT"; */
-"Fkf-x9-1kT.normalTitle" = "Click to unlock";
+"Fkf-x9-1kT.normalTitle" = "点击进行指纹解锁";
 
 /* Class = "UILabel"; text = "date"; ObjectID = "GYl-R6-xH6"; */
 "GYl-R6-xH6.text" = "date";
