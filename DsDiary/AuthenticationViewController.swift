@@ -40,9 +40,12 @@ class AuthenticationViewController: UIViewController {
                 [unowned self] (success: Bool, authenticationError: NSError?) -> Void in
                 dispatch_async(dispatch_get_main_queue()) {
                     if success {
-                        self.performSegueWithIdentifier("showDiaryTable", sender: sender)
+                        // 如果指纹验证成功，显示日记列表
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                        print("authenticateUser success")
                     } else {
                         if let error = authenticationError {
+                            // 当用户选择密码验证时的提示信息
                             if error.code == LAError.UserFallback.rawValue {
                                 let ac = UIAlertController(title: NSLocalizedString("Password try", comment: "Password try"), message: NSLocalizedString("Password try info", comment: "Password try info"), preferredStyle: .Alert)
                                 ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
@@ -50,7 +53,7 @@ class AuthenticationViewController: UIViewController {
                                 return
                             }
                         }
-                        
+                        // 指纹验证失败提示信息
                         let ac = UIAlertController(title: NSLocalizedString("Authentication failed", comment: "Authentication failed"), message: NSLocalizedString("Authentication failed info", comment: "Authentication failed info"), preferredStyle: .Alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                         self.presentViewController(ac, animated: true, completion: nil)
@@ -60,6 +63,7 @@ class AuthenticationViewController: UIViewController {
             }
             
         } else {
+            // 设备不支持指纹验证的提示信息
             let ac = UIAlertController(title: NSLocalizedString("No Touch ID", comment: "No Touch ID"), message: NSLocalizedString("No touch ID info", comment: "No touch ID info"), preferredStyle: .Alert)
             ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
             self.presentViewController(ac, animated: true, completion: nil)

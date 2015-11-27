@@ -26,7 +26,6 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
         }
-
     }
     
 

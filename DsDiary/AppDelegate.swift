@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         self.window?.tintColor = UIColor.primaryColor()
+        self.window?.makeKeyAndVisible()
+        
+        showAuthenticationViewController((self.window?.rootViewController)!)
+        
         return true
     }
 
@@ -33,10 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        let topController = self.topViewControllerWithRootViewController(UIApplication.sharedApplication().delegate?.window??.rootViewController)
+        showAuthenticationViewController(topController)
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -106,6 +113,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 abort()
             }
         }
+    }
+    
+    func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController! {
+        
+        if rootViewController.isKindOfClass(UITabBarController) {
+            let tabbarController =  rootViewController as! UITabBarController
+            return self.topViewControllerWithRootViewController(tabbarController.selectedViewController)
+        } else if (rootViewController.isKindOfClass(UINavigationController)) {
+            let navigationController = rootViewController as! UINavigationController
+            return self.topViewControllerWithRootViewController(navigationController.visibleViewController)
+        } else if ((rootViewController.presentedViewController) != nil){
+            let controller = rootViewController.presentedViewController
+            return self.topViewControllerWithRootViewController(controller)
+        } else {
+            return rootViewController
+        }
+    }
+    
+    func showAuthenticationViewController(viewController: UIViewController) {
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let authenticationViewController: AuthenticationViewController = storyboard.instantiateViewControllerWithIdentifier("AuthenticationViewController") as! AuthenticationViewController
+        authenticationViewController.modalTransitionStyle = UIModalTransitionStyle.CrossDissolve
+        viewController.presentViewController(authenticationViewController, animated: true, completion: nil)
     }
 
 }
