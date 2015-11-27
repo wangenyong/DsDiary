@@ -42,7 +42,6 @@ class DiaryViewController: UIViewController {
             weather       = Weathers(rawValue: diary!.weather)!
             textView.text = diary?.content
         } else {
-            textView.becomeFirstResponder()
             applyPlaceholderStyle(textView!, placeholderText: PLACEHOLDER_TEXT)
             dateLabel.text    = NSDateFormatter.localizedStringFromDate(NSDate(), dateStyle: .MediumStyle, timeStyle: .ShortStyle)
             weatherLabel.text = NSLocalizedString(Weathers.Sun.rawValue, comment: "Sun")
@@ -74,6 +73,11 @@ class DiaryViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if diary == nil {
+            textView.becomeFirstResponder()
+        }
+    }
     /**
      日记编辑方法
      */
