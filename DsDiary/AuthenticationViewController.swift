@@ -54,9 +54,11 @@ class AuthenticationViewController: UIViewController {
                             }
                         }
                         // 指纹验证失败提示信息
+                        /**
                         let ac = UIAlertController(title: NSLocalizedString("Authentication failed", comment: "Authentication failed"), message: NSLocalizedString("Authentication failed info", comment: "Authentication failed info"), preferredStyle: .Alert)
                         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                         self.presentViewController(ac, animated: true, completion: nil)
+                        */
                     }
                 }
                 

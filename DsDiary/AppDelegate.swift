@@ -33,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        let topController = self.topViewControllerWithRootViewController(UIApplication.sharedApplication().delegate?.window??.rootViewController)
+        if topController is AuthenticationViewController {
+            topController.dismissViewControllerAnimated(false, completion: nil)
+        }
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -115,6 +119,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    /**
+     找出当前的TopViewController
+     
+     - parameter rootViewController: rootViewController
+     
+     - returns: topViewController
+     */
     func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController! {
         
         if rootViewController.isKindOfClass(UITabBarController) {
@@ -131,6 +142,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    /**
+     显示指纹验证页面
+     
+     - parameter viewController: presenting viewController
+     */
     func showAuthenticationViewController(viewController: UIViewController) {
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let authenticationViewController: AuthenticationViewController = storyboard.instantiateViewControllerWithIdentifier("AuthenticationViewController") as! AuthenticationViewController
