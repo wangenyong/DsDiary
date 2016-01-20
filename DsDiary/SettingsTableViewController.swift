@@ -8,14 +8,20 @@
 
 import UIKit
 import RealmSwift
+import LocalAuthentication
 
 class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var pdfExportCell: UITableViewCell!
+    @IBOutlet weak var touchIDSwitch: UISwitch!
+
     
+    let defaults = NSUserDefaults.standardUserDefaults()
     let diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let useTouchID = defaults.boolForKey("UseTouchID")
+        touchIDSwitch.setOn(useTouchID, animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,6 +33,21 @@ class SettingsTableViewController: UITableViewController {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    @IBAction func ValueChanged(sender: UISwitch) {
+        let context = LAContext()
+        var error: NSError?
+        if sender.on {
+            if context.canEvaluatePolicy(.DeviceOwnerAuthenticationWithBiometrics, error: &error) {
+                defaults.setBool(sender.on, forKey: "UseTouchID")
+            } else {
+                let ac = UIAlertController(title: NSLocalizedString("No Touch ID", comment: "No Touch ID"), message: NSLocalizedString("No touch ID info", comment: "No touch ID info"), preferredStyle: .Alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                self.presentViewController(ac, animated: true, completion: nil)
+            }
+        } else {
+            defaults.setBool(sender.on, forKey: "UseTouchID")
+        }
+    }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let selectedCell = tableView.cellForRowAtIndexPath(indexPath)

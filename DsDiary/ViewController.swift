@@ -11,7 +11,6 @@ import RealmSwift
 
 class ViewController: UIViewController, DiarySavedControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var dateButton: UIButton!
     
     let realm = try! Realm()
     var diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
@@ -20,9 +19,6 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        dateButton.layer.borderWidth = 1
-        dateButton.layer.cornerRadius = 5
-        dateButton.layer.borderColor = UIColor.primaryColor().CGColor
         
         let nib = UINib(nibName: "DiaryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "DiaryTableViewCell")
