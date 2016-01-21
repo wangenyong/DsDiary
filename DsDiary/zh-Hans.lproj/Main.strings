@@ -14,6 +14,9 @@
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "j4N-KF-uUD"; */
 "j4N-KF-uUD.title" = "设置";
 
+/* Class = "UILabel"; text = "TouchID Authentication "; ObjectID = "kvD-EZ-MQJ"; */
+"kvD-EZ-MQJ.text" = "指纹验证";
+
 /* Class = "UILabel"; text = "weather"; ObjectID = "oJR-CM-uiT"; */
 "oJR-CM-uiT.text" = "weather";
 
@@ -23,3 +26,5 @@
 /* Class = "UILabel"; text = "Export to PDF"; ObjectID = "tZl-Ar-kr3"; */
 "tZl-Ar-kr3.text" = "导出为 PDF 文件";
 
+/* Class = "UIButton"; normalTitle = "Date"; ObjectID = "yes-WF-S9m"; */
+"yes-WF-S9m.normalTitle" = "Date";
