@@ -39,6 +39,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
+        searchController.searchBar.delegate = self
         tableView.tableHeaderView = searchController.searchBar
 
         dateFormatter.locale = NSLocale.currentLocale()
@@ -160,6 +161,13 @@ extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showDiary", sender: tableView)
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        diarys = try! Realm().objects(Diary).sorted("date", ascending: false)
+        tableView.reloadData()
     }
 }
 
