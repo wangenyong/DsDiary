@@ -18,6 +18,11 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     var notificationToken: NotificationToken?
     let dateFormatter    = NSDateFormatter()
     
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +48,10 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -131,6 +140,18 @@ extension ViewController: UITableViewDataSource {
                 self.realm.delete(self.diarys[indexPath.row])
             }
         }
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        let contentInsets = UIEdgeInsetsMake(0.0, 0.0, (keyboardSize?.height)!, 0.0)
+        tableView.contentInset = contentInsets
+        tableView.scrollIndicatorInsets = contentInsets
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        tableView.contentInset = UIEdgeInsetsZero
+        tableView.scrollIndicatorInsets = UIEdgeInsetsZero
     }
 }
 
