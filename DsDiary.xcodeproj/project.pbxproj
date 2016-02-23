@@ -13,6 +13,7 @@
 		C0238FC51BFC285300015811 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0238FC71BFC285300015811 /* InfoPlist.strings */; };
 		C0238FD71BFC4F2600015811 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0238FD91BFC4F2600015811 /* Localizable.strings */; };
 		C0238FDD1BFD5A0600015811 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0238FDC1BFD5A0600015811 /* SettingsTableViewController.swift */; };
+		C05EC8AE1C520AA200580A73 /* StringAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05EC8AD1C520AA200580A73 /* StringAdditions.swift */; };
 		C06AD6DD1BFDC60F00052841 /* PdfDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06AD6DC1BFDC60F00052841 /* PdfDetailViewController.swift */; };
 		C0734B7E1BF5ABED00C39277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */; };
 		C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0734B7F1BF5ABED00C39277 /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		C0238FDA1BFC4F2800015811 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C0238FDB1BFC4F2900015811 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C0238FDC1BFD5A0600015811 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		C05EC8AD1C520AA200580A73 /* StringAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringAdditions.swift; sourceTree = "<group>"; };
 		C06AD6DC1BFDC60F00052841 /* PdfDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PdfDetailViewController.swift; sourceTree = "<group>"; };
 		C0734B7A1BF5ABED00C39277 /* DsDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DsDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0734B7D1BF5ABED00C39277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				C0E9AD101BF5B0150052D9E5 /* UIColorAdditions.swift */,
 				C0E9AD231BF87AF20052D9E5 /* IntAdditions.swift */,
+				C05EC8AD1C520AA200580A73 /* StringAdditions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				C0E9AD201BF5D47A0052D9E5 /* WeatherCollectionViewCell.swift in Sources */,
 				C0E9AD241BF87AF20052D9E5 /* IntAdditions.swift in Sources */,
 				C0734B801BF5ABED00C39277 /* ViewController.swift in Sources */,
+				C05EC8AE1C520AA200580A73 /* StringAdditions.swift in Sources */,
 				C0E9AD151BF5B4A70052D9E5 /* DiaryTableViewCell.swift in Sources */,
 				C0DE48CA1C02F6E800783F6F /* AuthenticationViewController.swift in Sources */,
 				C0E9AD1C1BF5CEF10052D9E5 /* Weathers.swift in Sources */,

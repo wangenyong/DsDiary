@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Diary-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="DsDiary" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,18 +35,12 @@
                             <constraint firstItem="f22-33-zeU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="wpw-PY-qNK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="t22-yg-L8W">
-                        <nil key="title"/>
+                    <navigationItem key="navigationItem" title="Diary" id="t22-yg-L8W">
                         <barButtonItem key="leftBarButtonItem" image="Settings" id="rff-sO-4sO">
                             <connections>
                                 <segue destination="R7b-yt-fPz" kind="presentation" identifier="showSettings" id="HNs-F9-cvJ"/>
                             </connections>
                         </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yes-WF-S9m">
-                            <rect key="frame" x="254.5" y="7" width="91.5" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Date"/>
-                        </button>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="01a-J1-pNP">
                             <connections>
                                 <segue destination="lpx-rn-l2l" kind="show" identifier="newDiary" id="EeO-dX-4NW"/>
