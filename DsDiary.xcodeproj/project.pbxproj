@@ -224,6 +224,7 @@
 				TargetAttributes = {
 					C0734B791BF5ABED00C39277 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = HE2NX288S7;
 					};
 				};
 			};
@@ -476,7 +477,9 @@
 			baseConfigurationReference = B1D0AA8B919C07C3F60AA8A4 /* Pods-DsDiary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DsDiary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dswey.DsDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -488,7 +491,9 @@
 			baseConfigurationReference = 6A285D42BEB89738C0470839 /* Pods-DsDiary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = DsDiary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dswey.DsDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
