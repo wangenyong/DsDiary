@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
     func isYear() -> Bool {
-        let regex = try! NSRegularExpression(pattern: "^[0-9]{4}$",
+        let regex = try! NSRegularExpression(pattern: "^(?!0000)[0-9]{4}$",
             options: [.CaseInsensitive])
         
         return regex.firstMatchInString(self, options:[],
@@ -18,7 +18,7 @@ extension String {
     }
     
     func isMonth() -> Bool {
-        let regex = try! NSRegularExpression(pattern: "^[0-9]{4}-[01][0-9]$",
+        let regex = try! NSRegularExpression(pattern: "^(?!0000)[0-9]{4}-(0?[1-9]|1[0-2])$",
             options: [.CaseInsensitive])
         
         return regex.firstMatchInString(self, options:[],
@@ -26,7 +26,7 @@ extension String {
     }
     
     func isDate() -> Bool {
-        let regex = try! NSRegularExpression(pattern: "^[0-9]{4}-[01][0-9]-[0-3][0-9]$",
+        let regex = try! NSRegularExpression(pattern: "^(?!0000)[0-9]{4}-((0?[1-9]|1[0-2])-(0?[1-9]|1[0-9]|2[0-8])|(0?[13-9]|1[0-2])-(29|30)|(0?[13578]|1[02])-31)$",
             options: [.CaseInsensitive])
         
         return regex.firstMatchInString(self, options:[],

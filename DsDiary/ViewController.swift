@@ -40,6 +40,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "yyyy-mm-dd"
         tableView.tableHeaderView = searchController.searchBar
 
         dateFormatter.locale = NSLocale.currentLocale()
