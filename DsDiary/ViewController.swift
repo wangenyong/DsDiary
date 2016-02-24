@@ -81,10 +81,13 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         tableView.reloadData()
     }
     
+    /**
+     设置Tableview背景文字信息，当列表为空时显示
+     */
     func setupEmptyBackgroundView() {
         let message = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
         message.text = NSLocalizedString("Empty Message", comment: "Placehoulder")
-        message.textColor = UIColor.primaryColor()
+        message.textColor = UIColor.lightGrayColor()
         message.textAlignment = NSTextAlignment.Center
         message.sizeToFit()
         tableView.backgroundView = message
