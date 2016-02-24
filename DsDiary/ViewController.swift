@@ -31,6 +31,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         let nib = UINib(nibName: "DiaryTableViewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "DiaryTableViewCell")
         tableView.separatorStyle = .None
+        setupEmptyBackgroundView()
 
         notificationToken = realm.addNotificationBlock { [unowned self] note, realm in
             self.tableView.reloadData()
@@ -80,6 +81,15 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
         tableView.reloadData()
     }
     
+    func setupEmptyBackgroundView() {
+        let message = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+        message.text = NSLocalizedString("Empty Message", comment: "Placehoulder")
+        message.textColor = UIColor.primaryColor()
+        message.textAlignment = NSTextAlignment.Center
+        message.sizeToFit()
+        tableView.backgroundView = message
+    }
+    
     /**
      日记保存成功后的回调方法
      
@@ -97,6 +107,11 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if diarys.isEmpty {
+            tableView.backgroundView?.hidden = false
+        } else {
+            tableView.backgroundView?.hidden = true
+        }
         return diarys.count
     }
     

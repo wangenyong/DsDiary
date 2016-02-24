@@ -39,3 +39,5 @@
 // Touch ID不可用
 "No Touch ID" = "Touch ID 不可用";
 "No touch ID info" = "抱歉您的设备不支持指纹验证功能。";
+// 新日记
+"Empty Message" = "开始你的第一篇日记吧 :)";
