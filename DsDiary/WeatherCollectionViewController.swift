@@ -67,5 +67,5 @@ class WeatherCollectionViewController: UICollectionViewController {
 
 
 protocol SavingWeatherControllerDelegate {
-    func saveWeather(var weather : Weathers)
+    func saveWeather(weather : Weathers)
 }

@@ -97,7 +97,7 @@ class SettingsTableViewController: UITableViewController {
             // Mark the beginning of a new page.
             UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, 612, 792), nil)
             // Draw a page number at the bottom of each page.
-            currentPage++
+            currentPage += 1
             drawPageNumber(currentPage)
             // Render the current page and update the current range to
             // point to the beginning of the next page.
@@ -121,7 +121,7 @@ class SettingsTableViewController: UITableViewController {
      
      - returns: CFRange
      */
-    func drawText(var currentRange: CFRange, framesetter: CTFramesetterRef) -> CFRange {
+    func drawText(currentRange: CFRange, framesetter: CTFramesetterRef) -> CFRange {
         //Get the graphics context.
         let currentContext = UIGraphicsGetCurrentContext()
         // Put the text matrix into a known state. This ensures
@@ -143,9 +143,9 @@ class SettingsTableViewController: UITableViewController {
         // Draw the frame.
         CTFrameDraw(frameRef, currentContext!)
         // Update the current range based on what was drawn.
-        currentRange = CTFrameGetVisibleStringRange(frameRef)
-        currentRange.location += currentRange.length
-        currentRange.length = 0
+        var range = CTFrameGetVisibleStringRange(frameRef)
+        range.location += currentRange.length
+        range.length = 0
         
         return currentRange
     }

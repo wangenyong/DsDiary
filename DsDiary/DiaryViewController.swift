@@ -49,9 +49,9 @@ class DiaryViewController: UIViewController {
         
         let toolbar       = UIToolbar(frame: CGRectMake(0, 0, 320, 44))
         let flexSpaceItem = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-        let calendarItem  = UIBarButtonItem(image: UIImage(named: "Calendar"), style: .Plain, target: self, action: "CalendarSelected:")
-        let weatherItem   = UIBarButtonItem(image: UIImage(named: "Weather"), style: .Plain, target: self, action: "weatherSelected:")
-        let doneItem      = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+        let calendarItem  = UIBarButtonItem(image: UIImage(named: "Calendar"), style: .Plain, target: self, action: #selector(DiaryViewController.CalendarSelected(_:)))
+        let weatherItem   = UIBarButtonItem(image: UIImage(named: "Weather"), style: .Plain, target: self, action: #selector(DiaryViewController.weatherSelected(_:)))
+        let doneItem      = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(DiaryViewController.done))
         let items         = [flexSpaceItem, calendarItem, flexSpaceItem, flexSpaceItem, weatherItem, flexSpaceItem, flexSpaceItem, doneItem, flexSpaceItem]
         for item in items {
             item.tintColor = UIColor.primaryColor()
@@ -64,8 +64,8 @@ class DiaryViewController: UIViewController {
         
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DiaryViewController.keyboardWillShow(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DiaryViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,7 +84,7 @@ class DiaryViewController: UIViewController {
     func diaryEdit() {
         textView.editable = true
         textView.becomeFirstResponder()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: "diarySave")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(DiaryViewController.diarySave))
     }
     
     /**
@@ -277,5 +277,5 @@ extension DiaryViewController: CalendarSelectedControllerDelegate {
  *  定义日记保存协议
  */
 protocol DiarySavedControllerDelegate {
-    func diarySaveSucceed(var diary: String)
+    func diarySaveSucceed(diary: String)
 }

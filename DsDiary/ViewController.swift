@@ -19,8 +19,8 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     let dateFormatter    = NSDateFormatter()
     
     override func viewDidAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillShow(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
 
@@ -60,7 +60,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDiary" {
             let vc = segue.destinationViewController as! DiaryViewController
-            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: "diaryEdit")
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: vc, action: #selector(DiaryViewController.diaryEdit))
             if let indexPath = tableView.indexPathForSelectedRow {
                 vc.diary = diarys[indexPath.row]
             }
@@ -68,7 +68,7 @@ class ViewController: UIViewController, DiarySavedControllerDelegate {
       
         } else if segue.identifier == "newDiary" {
             let vc = segue.destinationViewController as! DiaryViewController
-            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: "diarySave")
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: vc, action: #selector(DiaryViewController.diarySave))
             vc.delegate = self
         } else if segue.identifier == "showSettings" {
             //let vc = segue.destinationViewController

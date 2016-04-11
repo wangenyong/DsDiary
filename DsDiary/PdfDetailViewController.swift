@@ -15,7 +15,7 @@ class PdfDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "shareTapped")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(PdfDetailViewController.shareTapped))
 
         if path != nil {
             let url = NSURL.fileURLWithPath(path!)
