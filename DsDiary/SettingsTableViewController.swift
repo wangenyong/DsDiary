@@ -144,10 +144,10 @@ class SettingsTableViewController: UITableViewController {
         CTFrameDraw(frameRef, currentContext!)
         // Update the current range based on what was drawn.
         var range = CTFrameGetVisibleStringRange(frameRef)
-        range.location += currentRange.length
+        range.location += range.length
         range.length = 0
         
-        return currentRange
+        return range
     }
     
     
